@@ -18,7 +18,6 @@ import listeners.reactionAddListener;
 import listeners.readyListener;
 import listeners.roleChangeListener;
 import net.dv8tion.jda.core.AccountType;
-import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Member;
@@ -44,8 +43,7 @@ public class Main {
 		getTimestamp();
 		
 		try {
-			@SuppressWarnings("unused")
-			JDA jda = builder.buildBlocking();
+			builder.buildBlocking();
 		} catch (Exception e) {}
 				
 		
@@ -108,7 +106,6 @@ public class Main {
 		for (Role sr : serverRoles) {
 			for (Role ur : userRoles) {
 				if (ur == sr) {
-					System.out.println(ur.getName() + " - " + sr.getName());
 					oldUser = true;
 					break;
 				}

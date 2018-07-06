@@ -27,7 +27,7 @@ public class CommandHandler {
 			}
 			
 		} else {
-			System.out.println("Command does not exist!");
+			ConsoleLogger.command("Command \""+cmd.invoke+"\" does not exist!");
 		}
 		
 	}
