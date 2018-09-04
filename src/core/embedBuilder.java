@@ -51,6 +51,17 @@ public class embedBuilder {
 		
 		return builder.build();
 	}
+
+	public static MessageEmbed buildTicket(String[] args, String author, String icon) {
+		String request 	= "";
+		for (int i=0; i<args.length; i++) {
+			request = request + args[i] + " ";
+		}
+		
+		String message = "User: **" + author + "**\n\nRequest: **" + request +"**";
+		MessageEmbed msg = embedBuilder.buildEmbed(Main.createTitle(icon, Main.getTimestamp()), message, null, false);
+		return msg;
+	}
 	
 	public static void sendAdminLog(String text, String emoji, TextChannel channel) {
 		String title = emoji + " "+ Main.getTimestamp();

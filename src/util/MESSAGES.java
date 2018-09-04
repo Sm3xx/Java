@@ -11,14 +11,13 @@ public class MESSAGES {
 	
 	// JOINING MESSAGE (PRIVATE CHANNEL)
 	
-	public static String IMPORTANT_TITLE = "YOU NEED TO READ THIS";
+	public static String CHOOSE_LANG_TITLE = "Welcome to Veteran-Gaming";
+	public static String CHOOSE_LANG = "Choose your language!";
 	
-	public static String JOINTITLE_DE = "Willkommen auf dem Discordserver von Veteran-Gaming";
-	public static String JOINMESSAGE_DE = "Bitte passe deinen Nicknamen auf unserem Server auf folgendes Format an: ```Nickname | Vorname```\n\nFalls du zur **\"Living in Los Santos\"**-Community gehörst klicke auf den Controller unter der Nachricht um die Rechte für die GTA Kanäle zu erhalten.\n\nFalls du Hilfe benötigst, dann klick auf die Deutschlandflagge unter der Nachricht.";
+	public static String INTEREST = "Möchtest du der Veteran Gaming Community beitreten? Dann klicke auf "+STATIC.VG+"\n\nBist du **NUR** wegen GTA-Roleplay hier, dann klicke auf "+STATIC.GTA;
 	
-	public static String JOINTITLE_EN = "Welcome to the Veteran-Gaming Discord";
-	public static String JOINMESSAGE_EN = "Edit your Nickname on our Server to make it look like this: ```Nickname | First Name```\n\nIf you need any help click the British Flag at the bottom of the message!";
-	
+	public static String CHANGE_NAME_DE = "Bitte passe deinen Nicknamen auf unserem Server auf folgendes Format an: ```Nickname | Vorname```\nFalls du Hilfe benötigst, dann klicke auf "+STATIC.HELP_GRAY+" unter der Nachricht.";
+	public static String CHANGE_NAME_EN = "Edit your Nickname on our Server to make it look like this:```Nickname | First Name```\n If you need any help click "+STATIC.HELP_RED+" at the bottom of the message!";
 	
 	// WAITING ROOM
 	public static String WAITING_ROOM_DE = "Folge der Anleitung, die dir unser Bot gerade als Privatnachricht geschrieben hat, damit er dir die Gastrolle zuweisen kann.";
@@ -27,10 +26,10 @@ public class MESSAGES {
 	
 	// NAMECHANGE HELP
 	public static String NAMECHANGE_HELP_TITLE_DE = "Erweiterte Hilfe";
-	public static String NAMECHANGE_HELP_TITLE_EN = "Extended Help";
+	public static String NAMECHANGE_HELP_TITLE_EN = "Advanced Help";
 	
-	public static String NAMECHANGE_HELP_DE = "**1.** Kopiere die Namensvorlage aus der oberen Nachricht heraus. \n\n**2.** Klicke danach auf unseren Server und suche dich rechts in der Spalte. Achte dabei darauf, dass der Kanal \"waiting\" aktiv ist. \n\n**3.** Nun mache einen Rechtsklick auf deinen Namen und wähle die Option \"Nickname Ändern\".\n\n**4.** Füge nun die Vorlage ein und passe deinen Nickname und deinen Vornamen an.\n\n__Beispiel:__ Sm3xx | Markus\n\nFalls du weiterhin Hilfe benötigen solltest, dann gib **&prefix&ticket <Nachricht>** ein, um uns über dein Problem zu informieren. Ein Admin meldet sich in Kürze bei dir.";
-	public static String NAMECHANGE_HELP_EN = "**1.** Copy the name sample from the message above. \n\n**2.** Click on our server and search your name on the right side. Make sure that the channel \"waiting\" is active. \n\n**3.** Right-Click your name and click \"Change Nickname\"\n\n**4.** Now paste the name sample and fill in your Nickname and First Name.\n\n__Example:__ Sm3xx | Markus\n\nIf you still need help, type: **&prefix&ticket <message>** to explain your problem. An Admin will get in touch with you shortly.";
+	public static String NAMECHANGE_HELP_DE = "**1.** Kopiere die Namensvorlage aus der oberen Nachricht heraus.\n\n**2.** Klicke auf den \"VG-Server\" am linken Bildschirmrand.\n\n**3.** Wähle den Kanal \"#waiting\" aus.\n\n**4.** Suche deinen Namen in der Spalte am rechten Bildschirmrand (du musst möglicherweise scrollen)\n\n**5.** Mache nun einen Rechts-Klick auf deinen Namen und wähle die Option \"Nickname ändern\".\n\n**6.** Füge jetzt die in Schritt 1 kopierte Vorlage ein und ändere den Nicknamen und den Vornamen.\n\n__Beispiel:__ Sm3xx | Markus\n\nFalls du immernoch Probleme haben solltest deinen Nicknamen anzupassen, dann melde dich im Support-Kanal in der Support Kategorie!";
+	public static String NAMECHANGE_HELP_EN = "**1.** Copy the name sample from the message above.\n\n**2.** Click on the VG-Server on the left side of your screen.\n\n**3.** Click on the text-channel #waiting.\n\n**4.** Search for your name on the right side of your screen (you may have to scroll down a bit)\n\n**5.** Right-Click your name and choose the option \"edit nickname\".\n\n**6.** Paste the sample that you copied in step one and change your Nickname and your First Name.\n\n__e.g.__ Sm3xx | Markus\n\nIn case you still have trouble changing your Nickname, please ask one of our admins or moderators in the \"Support\"-Category.";
 
 	
 	// NAME CHANGE ERROR
@@ -42,7 +41,7 @@ public class MESSAGES {
 	
 	
 	// ROLE ADDED
-	public static String GTA_ROLE_ADDED = "Du hast nun die Berechtigungen für die GTA-Roleplay-Kategorie. \n\nMelde dich bei einer der zuständigen Personen, damit sie dir die Jobspezifischen Rechte zuweisen kann. \n\nWenn du Fragen hast, schreibe in den (Channelname für GTA Roleplay) oder kontaktiere einen Admin oder Moderator.";
+	public static String GTA_ROLE_ADDED = "Du hast nun die GTA-Roleplay - Gastrolle zugewiesen bekommen und kannst dich in der GTA-Roleplay - Kategorie in den Voice- und Textkanälen frei bewegen.\n\nWende dich bitte im Support-Chat an einen Admin oder Moderator um die jobspezifischen Discord-Rollen zu erhalten. Auch bei weiteren Fragen kannst du dich dort gerne an uns wenden.\n\nDie VG-Community wünscht viel Spaß!";
 	
 	public static String GUEST_ROLE_TITLE_DE = "Willkommen";
 	public static String GUEST_ROLE_TITLE_EN = "Welcome"; 
@@ -52,8 +51,7 @@ public class MESSAGES {
 	
 	
 	// TICKET CONFIRMATION
-	public static String TICKET_CONF_DE = "Die Admins wurden informiert, bitte habe einen Moment Geduld, ein Admin meldet sich in Kürze bei dir.";
-	public static String TICKET_CONF_EN = "We recieved your ticket. Please be patient, an Admin will get in touch with you shortly.";
+	public static String TICKET_CONF = "Ticket created.";
 	
 	
 	// ERROR HANDLING

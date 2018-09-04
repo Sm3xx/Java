@@ -4,15 +4,19 @@ public class STATIC {
 	
 	
 	//	STATICS
+	public static final String VERSION = "1.1.0";
 	public static final String PREFIX = "/";	
 	public static final String SERVERID = "411546498493579275";	
 	public static final String TAG = "-vg-";
 	public static final String[] DEVELOPERS = {"282582885381177347"};
+	public static final String FOOTER = "Bot developed by Veteran-Gaming";
 	
 	
 	//	CHANNELS
 	public static final String ADMIN_LOG = "admin-log";	
-	public static final String ADMIN_TICKETS = "admin-tickets";	
+	public static final String ADMIN_TICKETS = "tickets";
+	public static final String GTA_TICKETS = "tickets-gta";
+	public static final String GTA_TICKETS_DUMP = "gtaticket-dump";
 	public static final String WAITING_ROOM = "waiting";  
 	
 	
@@ -28,6 +32,11 @@ public class STATIC {
 	public static final String CONTROLLER = "🎮";	
 	public static final String WHITE_SQUARE = "▫";	
 	public static final String PARTY = "🎉";
+	public static final String VG = "1⃣";
+	public static final String GTA = "2⃣";
+	public static final String HELP_GRAY = "❔";
+	public static final String HELP_RED = "❓";
+	public static final String FIVE = "5⃣";
 	
 	
 	// CONSOLE COLORS

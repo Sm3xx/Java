@@ -11,14 +11,16 @@ import commands.prune;
 import commands.rulesDE;
 import commands.rulesEN;
 import commands.ticket;
+import commands.ticket_gta;
 import listeners.channelListener;
-import listeners.commandListener;
+import listeners.messageListener;
 import listeners.nicknameChangeListener;
 import listeners.reactionAddListener;
 import listeners.readyListener;
 import listeners.roleChangeListener;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDABuilder;
+import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.MessageEmbed;
@@ -37,6 +39,7 @@ public class Main {
 		
 		builder.setToken(SECRETS.TOKEN);
 		builder.setAutoReconnect(true);
+		builder.setGame(Game.playing("v"+STATIC.VERSION));
 		
 		addListeners();
 		addCommand();
@@ -51,7 +54,7 @@ public class Main {
 
 	public static String getTimestamp() {
 		
-		final DateFormat sdf = new SimpleDateFormat("dd.MM.yyy || HH:mm");
+		final DateFormat sdf = new SimpleDateFormat("dd.MM.yyyy || HH:mm");
 		Date date = new Date();
 
 		return sdf.format(date);
@@ -128,13 +131,14 @@ public class Main {
 		CommandHandler.commands.put("ticket", new ticket());
 		CommandHandler.commands.put("rules_en", new rulesEN());
 		CommandHandler.commands.put("rules_de", new rulesDE());
-		CommandHandler.commands.put("prune", new prune());
+		CommandHandler.commands.put("purge", new prune());
 		CommandHandler.commands.put("join", new devJoin());
+		CommandHandler.commands.put("ticketgta", new ticket_gta());
 	}
 	
 	public static void addListeners() {
 		builder.addEventListener(new readyListener());
-		builder.addEventListener(new commandListener());
+		builder.addEventListener(new messageListener());
 		builder.addEventListener(new nicknameChangeListener());
 		builder.addEventListener(new roleChangeListener());
 		builder.addEventListener(new channelListener());
