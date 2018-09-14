@@ -8,7 +8,6 @@ import java.util.TimerTask;
 import core.Main;
 import core.embedBuilder;
 import core.ConsoleLogger;
-import core.ErrorHandler;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageHistory;
@@ -100,17 +99,7 @@ public class prune implements Command{
 		
 		if (success) {
 			ConsoleLogger.info(count + " messages deleted!");
-			Message msg = event.getTextChannel().sendMessage(
-					new EmbedBuilder().setColor(Color.green).setDescription(count + " messages deleted!").build()
-			).complete();
-			
-			
-			new Timer().schedule(new TimerTask() {
-				@Override
-				public void run() {
-					msg.delete().queue();
-				}
-			}, 5000);
+			Main.sendInformationMessage(event.getTextChannel(), Color.green, count + " messages deleted!", 5000);
 			
 			TextChannel adminlog = Main.getChannel(STATIC.ADMIN_LOG, event.getGuild());
 			String message = "**" + event.getMember().getEffectiveName() + "** deleted **"+count+"** Messages in **"+event.getChannel().getName()+"**";
@@ -123,10 +112,9 @@ public class prune implements Command{
 	public void error(boolean success, MessageReceivedEvent event) {
 		String name = Main.getUserName(Main.getGuildMember(event.getAuthor()));
 		ConsoleLogger.error("Prune called by "+name+" [Executed: "+success+"]");
-
-		ErrorHandler.cmdErr(event, "Error in runtime - Command: PRUNE");
 		
-		ConsoleLogger.message("Errormessage send to "+name);
+		Main.sendInformationMessage(event.getTextChannel(), Color.red, "Only Messages not older than 14 Days are deleteable.", 10000);
+		
 	}
 	
 	@Override

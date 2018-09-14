@@ -1,9 +1,12 @@
 package core;
 
+import java.awt.Color;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import commands.devJoin;
 import commands.ping;
@@ -19,10 +22,12 @@ import listeners.reactionAddListener;
 import listeners.readyListener;
 import listeners.roleChangeListener;
 import net.dv8tion.jda.core.AccountType;
+import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Member;
+import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.entities.Role;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -126,12 +131,26 @@ public class Main {
         });
 	}
 
+	public static void sendInformationMessage(TextChannel channel, Color color, String message, Integer timer) {
+		Message msg = channel.sendMessage(
+				new EmbedBuilder().setColor(color).setDescription(message).build()
+		).complete();
+		
+		
+		new Timer().schedule(new TimerTask() {
+			@Override
+			public void run() {
+				msg.delete().queue();
+			}
+		}, timer);
+	}
+	
 	public static void addCommand() {
 		CommandHandler.commands.put("ping", new ping());
 		CommandHandler.commands.put("ticket", new ticket());
 		CommandHandler.commands.put("rules_en", new rulesEN());
 		CommandHandler.commands.put("rules_de", new rulesDE());
-		CommandHandler.commands.put("purge", new prune());
+		CommandHandler.commands.put("prune", new prune());
 		CommandHandler.commands.put("join", new devJoin());
 		CommandHandler.commands.put("ticketgta", new ticket_gta());
 	}

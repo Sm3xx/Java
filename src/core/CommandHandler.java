@@ -1,5 +1,6 @@
 package core;
 
+import java.awt.Color;
 import java.util.HashMap;
 
 import commands.Command;
@@ -28,6 +29,7 @@ public class CommandHandler {
 			
 		} else {
 			ConsoleLogger.command("Command \""+cmd.invoke+"\" does not exist!");
+			Main.sendInformationMessage(cmd.event.getTextChannel(), Color.red, "Command \""+cmd.invoke+"\" does not exist!", 5000);
 		}
 		
 	}
