@@ -13,28 +13,27 @@ import util.STATIC;
 
 public class memberJoinListener extends ListenerAdapter{
 
-	public void onGuildMemberJoin(GuildMemberJoinEvent event) {
-		
+	public void onGuildMemberJoin(GuildMemberJoinEvent event) {	
 		event.getUser().openPrivateChannel().queue((channel) ->
-        {
-        	MessageEmbed content = new EmbedBuilder().setDescription(MESSAGES.CHOOSE_LANG).setTitle(MESSAGES.CHOOSE_LANG_TITLE).setColor(Color.green).setFooter(STATIC.FOOTER, null).build();
-    		String id = channel.sendMessage(content).complete().getId();
-    		
-    		channel.addReactionById(id, STATIC.FLAG_DE).queue();
-    		channel.addReactionById(id, STATIC.FLAG_GB).queue();
-        });
+		{
+			MessageEmbed content = new EmbedBuilder().setDescription(MESSAGES.CHOOSE_LANG).setTitle(MESSAGES.CHOOSE_LANG_TITLE).setColor(Color.green).setFooter(STATIC.FOOTER, null).build();
+			String id = channel.sendMessage(content).complete().getId();
+			
+			channel.addReactionById(id, STATIC.FLAG_DE).queue();
+			channel.addReactionById(id, STATIC.FLAG_GB).queue();
+		});
 		
 		TextChannel adminlog = Main.getChannel(STATIC.ADMIN_LOG, event.getGuild());
 		TextChannel waiting = Main.getChannel(STATIC.WAITING_ROOM, event.getGuild());
 		
-		MessageEmbed content = embedBuilder.buildEmbed("Willkommen "+Main.getUserName(event.getMember()), MESSAGES.WAITING_ROOM_DE, "Welcome "+Main.getUserName(event.getMember()), MESSAGES.WAITING_ROOM_EN, Color.WHITE, true);
-		waiting.sendMessage(event.getUser().getAsMention()+" joined");
+		String username = Main.getUserName(event.getMember());
+		MessageEmbed content = embedBuilder.buildEmbed("Willkommen "+username, MESSAGES.WAITING_ROOM_DE, "Welcome "+username, MESSAGES.WAITING_ROOM_EN, Color.WHITE, true);
+		waiting.sendMessage(event.getUser().getAsMention()+" joined").queue();
 		waiting.sendMessage(content).queue();
 		
 		
 		String msg = "**" + event.getMember().getEffectiveName() + "** joined!";
 		adminlog.sendMessage(embedBuilder.buildEmbed(STATIC.NEW + " " + Main.getTimestamp(), msg, null, false)).queue();
-		
 	}
 	
 }

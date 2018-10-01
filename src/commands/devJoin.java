@@ -21,20 +21,21 @@ public class devJoin implements Command{
 
 	@Override
 	public boolean action(String[] args, MessageReceivedEvent event) {
-		event.getAuthor().openPrivateChannel().queue((channel) ->
-        {
-        	MessageEmbed content = new EmbedBuilder().setDescription(MESSAGES.CHOOSE_LANG).setTitle(MESSAGES.CHOOSE_LANG_TITLE).setColor(Color.green).build();
-    		String id = channel.sendMessage(content).complete().getId();
-    		
-    		channel.addReactionById(id, STATIC.FLAG_DE).queue();
-    		channel.addReactionById(id, STATIC.FLAG_GB).queue();
-        });
+		event.getMember().getUser().openPrivateChannel().queue((channel) ->
+		{
+			MessageEmbed content = new EmbedBuilder().setDescription(MESSAGES.CHOOSE_LANG).setTitle(MESSAGES.CHOOSE_LANG_TITLE).setColor(Color.green).setFooter(STATIC.FOOTER, null).build();
+			String id = channel.sendMessage(content).complete().getId();
+			
+			channel.addReactionById(id, STATIC.FLAG_DE).queue();
+			channel.addReactionById(id, STATIC.FLAG_GB).queue();
+		});
 		
-		TextChannel adminlog = Main.getChannel(STATIC.ADMIN_LOG, Main.getGuild(event.getAuthor()));
-		TextChannel waiting = Main.getChannel(STATIC.WAITING_ROOM, Main.getGuild(event.getAuthor()));
+		TextChannel adminlog = Main.getChannel(STATIC.ADMIN_LOG, event.getGuild());
+		TextChannel waiting = Main.getChannel(STATIC.WAITING_ROOM, event.getGuild());
 		
-		MessageEmbed content = embedBuilder.buildEmbed("Willkommen "+Main.getUserName(event.getMember()), MESSAGES.WAITING_ROOM_DE, "Welcome "+Main.getUserName(event.getMember()), MESSAGES.WAITING_ROOM_EN, Color.WHITE, true);
-		waiting.sendMessage(event.getAuthor().getAsMention()+" joined").queue();
+		String username = Main.getUserName(event.getMember());
+		MessageEmbed content = embedBuilder.buildEmbed("Willkommen "+username, MESSAGES.WAITING_ROOM_DE, "Welcome "+username, MESSAGES.WAITING_ROOM_EN, Color.WHITE, true);
+		waiting.sendMessage(event.getMember().getAsMention()+" joined").queue();
 		waiting.sendMessage(content).queue();
 		
 		

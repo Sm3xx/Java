@@ -46,9 +46,14 @@ public class MESSAGES {
 	public static String GUEST_ROLE_TITLE_DE = "Willkommen";
 	public static String GUEST_ROLE_TITLE_EN = "Welcome"; 
 	
-	public static String GUEST_ROLE_ADDED_DE = "Du hast nun die Gastrolle zugewiesen bekommen und kannst dich eingeschränkt in den Kanälen bewegen.\nBitte gib noch **&prefix&rules_de** ein um dir unsere Communityregeln anzuschauen!\n\nViel Spaß bei uns!";
-	public static String GUEST_ROLE_ADDED_EN = "You just obtained the guest role and you are now allowed to use our Text- and Voice-Channels to communicate with us.\nPlease type **&prefix&rules_en** to read our Communityrules!\n\nEnjoy your stay!";
+	public static String GUEST_ROLE_ADDED_DE = "Du hast nun die Gastrolle zugewiesen bekommen und kannst dich eingeschränkt in den Kanälen bewegen.\nBitte gib noch **"+STATIC.PREFIX+"rules_de** ein um dir unsere Communityregeln anzuschauen!\n\nViel Spaß bei uns!";
+	public static String GUEST_ROLE_ADDED_EN = "You just obtained the guest role and you are now allowed to use our Text- and Voice-Channels to communicate with us.\nPlease type **"+STATIC.PREFIX+"rules_en** to read our Communityrules!\n\nEnjoy your stay!";
 	
+	
+	// TICKET MESSAGE
+	public static String TICKET_MESSAGE_DE = "Um ein Ticket zu erstellen, klicke bitte auf den Link.";
+	public static String TICKET_MESSAGE_EN = "To create a new ticket click on the link below.";
+	public static String TICKET_LINK	   = "https://support.veteran-gaming.at/";
 	
 	// TICKET CONFIRMATION
 	public static String TICKET_CONF = "Ticket created.";

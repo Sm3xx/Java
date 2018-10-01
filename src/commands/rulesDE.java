@@ -21,6 +21,7 @@ public class rulesDE implements Command{
 				return false;
 			}
 		} catch (Exception e) {
+			ConsoleLogger.error(e.getMessage());
 			return true;
 		}
 		return true;

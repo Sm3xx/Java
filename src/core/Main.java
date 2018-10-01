@@ -13,9 +13,10 @@ import commands.ping;
 import commands.prune;
 import commands.rulesDE;
 import commands.rulesEN;
+import commands.test;
 import commands.ticket;
-import commands.ticket_gta;
 import listeners.channelListener;
+import listeners.memberJoinListener;
 import listeners.messageListener;
 import listeners.nicknameChangeListener;
 import listeners.reactionAddListener;
@@ -28,6 +29,7 @@ import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.entities.Role;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -145,18 +147,33 @@ public class Main {
 		}, timer);
 	}
 	
+	public static void sendInformationMessage(MessageChannel channel, Color color, String message, Integer timer) {
+		Message msg = channel.sendMessage(
+				new EmbedBuilder().setColor(color).setDescription(message).build()
+		).complete();
+		
+		
+		new Timer().schedule(new TimerTask() {
+			@Override
+			public void run() {
+				msg.delete().queue();
+			}
+		}, timer);
+	}
+	
 	public static void addCommand() {
-		CommandHandler.commands.put("ping", new ping());
-		CommandHandler.commands.put("ticket", new ticket());
-		CommandHandler.commands.put("rules_en", new rulesEN());
-		CommandHandler.commands.put("rules_de", new rulesDE());
-		CommandHandler.commands.put("prune", new prune());
-		CommandHandler.commands.put("join", new devJoin());
-		CommandHandler.commands.put("ticketgta", new ticket_gta());
+		CommandHandler.registerCommand(new String[] {"ping"}, new ping());
+		CommandHandler.registerCommand(new String[] {"join"}, new devJoin());
+		CommandHandler.registerCommand(new String[] {"test", "Test"}, new test());
+		CommandHandler.registerCommand(new String[] {"prune", "Prune"}, new prune());
+		CommandHandler.registerCommand(new String[] {"rules_en", "Rules_en", "Rules_EN", "Rules_en"}, new rulesEN());
+		CommandHandler.registerCommand(new String[] {"rules_de", "Rules_de", "Rules_DE", "Rules_De"}, new rulesDE());
+		CommandHandler.registerCommand(new String[] {"ticket", "Ticket", "ticketgta", "TicketGta", "Ticketgta"}, new ticket());
 	}
 	
 	public static void addListeners() {
 		builder.addEventListener(new readyListener());
+		builder.addEventListener(new memberJoinListener());
 		builder.addEventListener(new messageListener());
 		builder.addEventListener(new nicknameChangeListener());
 		builder.addEventListener(new roleChangeListener());

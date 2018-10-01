@@ -34,4 +34,10 @@ public class CommandHandler {
 		
 	}
 	
+	public static void registerCommand(String[] invokes, Command command) {
+		for (String invoke : invokes) {
+			CommandHandler.commands.put(invoke, command);
+		}
+	}
+	
 }

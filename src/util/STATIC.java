@@ -4,7 +4,7 @@ public class STATIC {
 	
 	
 	//	STATICS
-	public static final String VERSION = "1.1.1";
+	public static final String VERSION = "1.2.0";
 	
 	public static final String PREFIX = "/";	
 	public static final String SERVERID = "411546498493579275";	
@@ -38,6 +38,7 @@ public class STATIC {
 	public static final String HELP_GRAY = "❔";
 	public static final String HELP_RED = "❓";
 	public static final String FIVE = "5⃣";
+	public static final String PING_PONG = "🏓";
 	
 	
 	// CONSOLE COLORS
