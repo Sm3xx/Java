@@ -24,7 +24,7 @@ public class ErrorHandler {
 		MessageEmbed message = new EmbedBuilder().setDescription(content).setColor(Color.RED).build();
 		
 		event.getChannel().sendMessage(msg).queue();
-		ConsoleLogger.error(content);
+		Logger.error(content);
 		
 		for (String id : STATIC.DEVELOPERS) {
 			User user = Main.getGuild(event.getAuthor()).getMemberById(id).getUser();

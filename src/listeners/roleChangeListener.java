@@ -3,7 +3,7 @@ package listeners;
 import java.awt.Color;
 import java.util.List;
 
-import core.ConsoleLogger;
+import core.Logger;
 import core.Main;
 import core.embedBuilder;
 import net.dv8tion.jda.core.entities.MessageEmbed;
@@ -27,7 +27,7 @@ public class roleChangeListener extends ListenerAdapter{
 		
 		String msg = createMessage(roles.get(0).getName(), Main.getUserName(event.getMember()), false);
 		embedBuilder.sendAdminLog(msg, STATIC.CHECKMARK, channel);
-		ConsoleLogger.info(roles.get(0).getName()+"-Role added to "+Main.getUserName(event.getMember()));
+		Logger.info(roles.get(0).getName()+"-Role added to "+Main.getUserName(event.getMember()));
 	}
 	
 	// Role removed from user
@@ -38,7 +38,7 @@ public class roleChangeListener extends ListenerAdapter{
 		
 		String msg = createMessage(roles.get(0).getName() ,Main.getUserName(event.getMember()), true);
 		embedBuilder.sendAdminLog(msg, STATIC.CROSS, channel);
-		ConsoleLogger.info(roles.get(0).getName()+"-Role removed from "+Main.getUserName(event.getMember()));
+		Logger.info(roles.get(0).getName()+"-Role removed from "+Main.getUserName(event.getMember()));
     }
     
     // Create the message String for the Admin Log

@@ -1,6 +1,8 @@
 package listeners;
 
 import java.awt.Color;
+
+import core.ExceptionContainer;
 import core.Main;
 import core.embedBuilder;
 import core.roleHandler;
@@ -39,8 +41,10 @@ public class reactionAddListener extends ListenerAdapter{
 				
 				if (emote.equalsIgnoreCase(STATIC.GTA)) {
 					// Add GTA-Roleplay role to User
-					roleHandler.addRole(guild, member, ROLES.GTA_ROLEPLAY_GUEST);
-					Main.sendPrivateMessage(event.getUser(), embedBuilder.buildEmbed(MESSAGES.CONFIRMATION_TITLE_DE, MESSAGES.GTA_ROLE_ADDED, Color.GREEN, true), "Role-Add");
+					ExceptionContainer error = roleHandler.addRole(guild, member, ROLES.GTA_ROLEPLAY_GUEST);
+					if (error == null) {
+						Main.sendPrivateMessage(event.getUser(), embedBuilder.buildEmbed(MESSAGES.CONFIRMATION_TITLE_DE, MESSAGES.GTA_ROLE_ADDED, Color.GREEN, true), "Role-Add");
+					}
 				}
 				
 				if (emote.equalsIgnoreCase(STATIC.VG)) {

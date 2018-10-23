@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import core.Main;
 import core.embedBuilder;
-import core.ConsoleLogger;
+import core.Logger;
 import core.ErrorHandler;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.MessageEmbed;
@@ -21,7 +21,7 @@ public class rulesDE implements Command{
 				return false;
 			}
 		} catch (Exception e) {
-			ConsoleLogger.error(e.getMessage());
+			Logger.error(e.getMessage());
 			return true;
 		}
 		return true;
@@ -46,19 +46,19 @@ public class rulesDE implements Command{
 	@Override
 	public void executed(boolean success, MessageReceivedEvent event) {
 		Member member = Main.getGuildMember(event.getAuthor());
-		ConsoleLogger.command("Rules_de called by "+Main.getUserName(member)+" [Executed: "+success+"]");
-		ConsoleLogger.message("Rules sent to "+Main.getUserName(member));
+		Logger.command("Rules_de called by "+Main.getUserName(member)+" [Executed: "+success+"]");
+		Logger.message("Rules sent to "+Main.getUserName(member));
 		
 	}
 	
 	@Override
 	public void error(boolean success, MessageReceivedEvent event) {
 		String name = Main.getUserName(Main.getGuildMember(event.getAuthor()));
-		ConsoleLogger.error("Rules_de called by "+name+" [Executed: "+success+"]");
+		Logger.error("Rules_de called by "+name+" [Executed: "+success+"]");
 
 		ErrorHandler.cmdErr(event, "Error in runtime - Command: RULES_DE");
 		
-		ConsoleLogger.message("Errormessage send to "+name);
+		Logger.message("Errormessage send to "+name);
 	}
 
 	@Override

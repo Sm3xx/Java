@@ -1,6 +1,6 @@
 package core;
 
-public class ConsoleLogger {
+public class Logger {
 	
 	public static void info(String message) {
 		System.out.println("\n[INFO]     -  ["+Main.getTimestamp()+"] "+message);

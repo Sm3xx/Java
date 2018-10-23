@@ -9,11 +9,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import commands.devJoin;
+import commands.dood;
 import commands.ping;
 import commands.prune;
 import commands.rulesDE;
 import commands.rulesEN;
-import commands.test;
 import commands.ticket;
 import listeners.channelListener;
 import listeners.memberJoinListener;
@@ -126,6 +126,18 @@ public class Main {
 		else return true;
 	}
 	
+	public static boolean checkPermission(Member member, String[] permissions) {
+		List<Role> roleList = member.getRoles();
+		for (String p : permissions) {
+			for (Role r : roleList) {
+				if (r.getName().equalsIgnoreCase(p)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
 	public static void sendPrivateMessage(User user, MessageEmbed content, String messageType) {
 		user.openPrivateChannel().queue((channel) ->
         {
@@ -163,8 +175,8 @@ public class Main {
 	
 	public static void addCommand() {
 		CommandHandler.registerCommand(new String[] {"ping"}, new ping());
+		CommandHandler.registerCommand(new String[] {"dood"}, new dood());
 		CommandHandler.registerCommand(new String[] {"join"}, new devJoin());
-		CommandHandler.registerCommand(new String[] {"test", "Test"}, new test());
 		CommandHandler.registerCommand(new String[] {"prune", "Prune"}, new prune());
 		CommandHandler.registerCommand(new String[] {"rules_en", "Rules_en", "Rules_EN", "Rules_en"}, new rulesEN());
 		CommandHandler.registerCommand(new String[] {"rules_de", "Rules_de", "Rules_DE", "Rules_De"}, new rulesDE());

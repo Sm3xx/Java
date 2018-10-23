@@ -2,16 +2,12 @@ package commands;
 
 import java.awt.Color;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import core.Main;
 import core.embedBuilder;
-import core.ConsoleLogger;
+import core.Logger;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageHistory;
-import net.dv8tion.jda.core.entities.Role;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import util.PERMISSIONS;
@@ -37,34 +33,14 @@ public class prune implements Command{
 		}
 		
 		if (getCount(args[0]) < 2 || getCount(args[0]) > 100) {
-			event.getTextChannel().sendMessage(error.setDescription("You can only delete 2 up to 100 messages").build()).queue();
+			Main.sendInformationMessage(event.getChannel(), Color.RED, "You can only delete 2 up to 100 messages", 5000);;
 			return true;
 		}
 		
-		boolean allowed = false;
-		List<Role> roleList = event.getMember().getRoles();
-		for (String p : PERMISSIONS.PRUNE) {
-			for (Role r : roleList) {
-				if (r.getName().equalsIgnoreCase(p)) {
-					allowed = true;
-				}
-			}
-		}
-		
-		if (allowed) {
+		if (Main.checkPermission(event.getMember(), PERMISSIONS.PRUNE)) {
 			return false;
 		} else {
-			Message msg = event.getTextChannel().sendMessage(
-					new EmbedBuilder().setColor(Color.red).setDescription("Missing permissions!").build()
-			).complete();
-			
-			
-			new Timer().schedule(new TimerTask() {
-				@Override
-				public void run() {
-					msg.delete().queue();
-				}
-			}, 5000);
+			Main.sendInformationMessage(event.getChannel(), Color.red, "Missing permissions!", 5000);			
 		}
 		
 		return true;
@@ -86,7 +62,6 @@ public class prune implements Command{
 			
 			return true;
 		} catch (Exception e) {
-			System.out.println(e.toString());;
 			return false;
 		}
 		
@@ -95,10 +70,10 @@ public class prune implements Command{
 	@Override
 	public void executed(boolean success, MessageReceivedEvent event) {
 		String name = Main.getUserName(Main.getGuildMember(event.getAuthor()));
-		ConsoleLogger.command("Prune called by "+name+" [Executed: "+success+"]");
+		Logger.command("Prune called by "+name+" [Executed: "+success+"]");
 		
 		if (success) {
-			ConsoleLogger.info(count + " messages deleted!");
+			Logger.info(count + " messages deleted!");
 			Main.sendInformationMessage(event.getTextChannel(), Color.green, count + " messages deleted!", 5000);
 			
 			TextChannel adminlog = Main.getChannel(STATIC.ADMIN_LOG, event.getGuild());
@@ -111,7 +86,7 @@ public class prune implements Command{
 	@Override
 	public void error(boolean success, MessageReceivedEvent event) {
 		String name = Main.getUserName(Main.getGuildMember(event.getAuthor()));
-		ConsoleLogger.error("Prune called by "+name+" [Executed: "+success+"]");
+		Logger.error("Prune called by "+name+" [Executed: "+success+"]");
 		
 		Main.sendInformationMessage(event.getTextChannel(), Color.red, "Only Messages not older than 14 Days are deleteable.", 10000);
 		
@@ -120,7 +95,7 @@ public class prune implements Command{
 	@Override
 	public String help(MessageReceivedEvent event) {
 		event.getChannel().sendMessage(error.setTitle("Syntax: /prune <MessageCount>").setDescription("Delete multiple messages in one channel at once").build()).queue();
-		ConsoleLogger.info("Prune help called by "+Main.getUserName(Main.getGuildMember(event.getAuthor())));
+		Logger.info("Prune help called by "+Main.getUserName(Main.getGuildMember(event.getAuthor())));
 		return null;
 	}
 	

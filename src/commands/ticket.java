@@ -2,7 +2,7 @@ package commands;
 
 import java.awt.Color;
 
-import core.ConsoleLogger;
+import core.Logger;
 import core.ErrorHandler;
 import core.Main;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -32,18 +32,18 @@ public class ticket implements Command{
 	@Override
 	public void executed(boolean success, MessageReceivedEvent event) {
 		String name = Main.getUserName(Main.getGuildMember(event.getAuthor()));
-		ConsoleLogger.command("Ticket called by "+name+" [Executed: "+success+"]");			
-		ConsoleLogger.message("Ticket link sent to "+name);
+		Logger.command("Ticket called by "+name+" [Executed: "+success+"]");			
+		Logger.message("Ticket link sent to "+name);
 	}
 	
 	@Override
 	public void error(boolean success, MessageReceivedEvent event) {
 		String name = Main.getUserName(Main.getGuildMember(event.getAuthor()));
-		ConsoleLogger.error("GTA-Ticket called by "+name+" [Executed: "+success+"]");
+		Logger.error("GTA-Ticket called by "+name+" [Executed: "+success+"]");
 		
 		ErrorHandler.cmdErr(event, "Error in runtime - Command: TICKET");
 		
-		ConsoleLogger.message("Errormessage send to "+name);
+		Logger.message("Errormessage send to "+name);
 	}
 
 	@Override
