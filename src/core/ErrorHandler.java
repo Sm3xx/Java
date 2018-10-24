@@ -16,7 +16,7 @@ public class ErrorHandler {
 		message_en = message_en.replaceAll("&prefix&", STATIC.PREFIX);
 		String title_de = Main.createTitle(STATIC.FLAG_DE, MESSAGES.ERROR_TITLE_DE);
 		String title_en = Main.createTitle(STATIC.FLAG_GB, MESSAGES.ERROR_TITLE_EN);
-		Main.sendPrivateMessage(user, embedBuilder.buildEmbed(title_de , message_de, title_en, message_en, Color.RED, true), errorType);
+		MessageBuilder.sendPrivateMessage(user, MessageBuilder.buildEmbed(title_de , message_de, title_en, message_en, Color.RED, true), errorType);
 	}
 	
 	public static void cmdErr(MessageReceivedEvent event, String content) {
@@ -28,7 +28,7 @@ public class ErrorHandler {
 		
 		for (String id : STATIC.DEVELOPERS) {
 			User user = Main.getGuild(event.getAuthor()).getMemberById(id).getUser();
-			Main.sendPrivateMessage(user, message, "Error");
+			MessageBuilder.sendPrivateMessage(user, message, "Error");
 		}
 	}
 	

@@ -8,6 +8,7 @@ public class ROLES {
 	public static final String TRIALMEMBER = "-VG- Trialmember";
 	public static final String GUEST = "Gäste";	
 	public static final String GTA_ROLEPLAY_GUEST = "GTA-Roleplay - Gast";
+	public static final String DEV = "DEV";
 	
 	
 }

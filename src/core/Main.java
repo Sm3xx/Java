@@ -1,36 +1,28 @@
 package core;
 
-import java.awt.Color;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import commands.devJoin;
-import commands.dood;
-import commands.ping;
-import commands.prune;
-import commands.rulesDE;
-import commands.rulesEN;
-import commands.ticket;
-import listeners.channelListener;
-import listeners.memberJoinListener;
-import listeners.messageListener;
-import listeners.nicknameChangeListener;
-import listeners.reactionAddListener;
-import listeners.readyListener;
-import listeners.roleChangeListener;
+import commands.DevJoin;
+import commands.AddServerRole;
+import commands.Ping;
+import commands.Prune;
+import commands.Rules_de;
+import commands.Rules_en;
+import commands.Ticket;
+import listeners.ChannelListener;
+import listeners.MemberJoinListener;
+import listeners.MessageListener;
+import listeners.NicknameChangeListener;
+import listeners.ReactionAddListener;
+import listeners.ReadyListener;
+import listeners.RoleChangeListener;
 import net.dv8tion.jda.core.AccountType;
-import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.MessageChannel;
-import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.entities.Role;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
@@ -75,11 +67,8 @@ public class Main {
 		}
 	}
 
-	public static String createTitle(String emote, String titleContent) {
-	
-	
+	public static String createTitle(String emote, String titleContent) {	
 		String title = emote + " " + titleContent;
-		
 		return title;
 	}
 	
@@ -107,11 +96,9 @@ public class Main {
 	}
 
 	public static boolean checkNewMember(Guild guild, Member member) {
-		
 		List<Role> serverRoles = guild.getRoles();
 		List<Role> userRoles = member.getRoles();
 		boolean oldUser = false;
-		
 		
 		for (Role sr : serverRoles) {
 			for (Role ur : userRoles) {
@@ -138,59 +125,24 @@ public class Main {
 		return false;
 	}
 	
-	public static void sendPrivateMessage(User user, MessageEmbed content, String messageType) {
-		user.openPrivateChannel().queue((channel) ->
-        {
-            channel.sendMessage(content).complete();
-        });
-	}
-
-	public static void sendInformationMessage(TextChannel channel, Color color, String message, Integer timer) {
-		Message msg = channel.sendMessage(
-				new EmbedBuilder().setColor(color).setDescription(message).build()
-		).complete();
-		
-		
-		new Timer().schedule(new TimerTask() {
-			@Override
-			public void run() {
-				msg.delete().queue();
-			}
-		}, timer);
-	}
-	
-	public static void sendInformationMessage(MessageChannel channel, Color color, String message, Integer timer) {
-		Message msg = channel.sendMessage(
-				new EmbedBuilder().setColor(color).setDescription(message).build()
-		).complete();
-		
-		
-		new Timer().schedule(new TimerTask() {
-			@Override
-			public void run() {
-				msg.delete().queue();
-			}
-		}, timer);
-	}
-	
 	public static void addCommand() {
-		CommandHandler.registerCommand(new String[] {"ping"}, new ping());
-		CommandHandler.registerCommand(new String[] {"dood"}, new dood());
-		CommandHandler.registerCommand(new String[] {"join"}, new devJoin());
-		CommandHandler.registerCommand(new String[] {"prune", "Prune"}, new prune());
-		CommandHandler.registerCommand(new String[] {"rules_en", "Rules_en", "Rules_EN", "Rules_en"}, new rulesEN());
-		CommandHandler.registerCommand(new String[] {"rules_de", "Rules_de", "Rules_DE", "Rules_De"}, new rulesDE());
-		CommandHandler.registerCommand(new String[] {"ticket", "Ticket", "ticketgta", "TicketGta", "Ticketgta"}, new ticket());
+		CommandHandler.registerCommand("ping", new Ping());
+		CommandHandler.registerCommand("asr", new AddServerRole());
+		CommandHandler.registerCommand("join", new DevJoin());
+		CommandHandler.registerCommand("prune", new Prune());
+		CommandHandler.registerCommand("rules_en", new Rules_en());
+		CommandHandler.registerCommand("rules_de", new Rules_de());
+		CommandHandler.registerCommand(new String[] {"ticket", "ticketgta"}, new Ticket());
 	}
 	
 	public static void addListeners() {
-		builder.addEventListener(new readyListener());
-		builder.addEventListener(new memberJoinListener());
-		builder.addEventListener(new messageListener());
-		builder.addEventListener(new nicknameChangeListener());
-		builder.addEventListener(new roleChangeListener());
-		builder.addEventListener(new channelListener());
-		builder.addEventListener(new reactionAddListener());
+		builder.addEventListener(new ReadyListener());
+		builder.addEventListener(new MemberJoinListener());
+		builder.addEventListener(new MessageListener());
+		builder.addEventListener(new NicknameChangeListener());
+		builder.addEventListener(new RoleChangeListener());
+		builder.addEventListener(new ChannelListener());
+		builder.addEventListener(new ReactionAddListener());
 	}
 
 

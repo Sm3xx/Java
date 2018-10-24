@@ -43,8 +43,8 @@ public class MESSAGES {
 	// ROLE ADDED
 	public static String GTA_ROLE_ADDED = "Du hast nun die GTA-Roleplay - Gastrolle zugewiesen bekommen und kannst dich in der GTA-Roleplay - Kategorie in den Voice- und Textkanälen frei bewegen.\n\nWende dich bitte im Support-Chat an einen Admin oder Moderator um die jobspezifischen Discord-Rollen zu erhalten. Auch bei weiteren Fragen kannst du dich dort gerne an uns wenden.\n\nDie VG-Community wünscht viel Spaß!";
 	
-	public static String GUEST_ROLE_TITLE_DE = "Willkommen";
-	public static String GUEST_ROLE_TITLE_EN = "Welcome"; 
+	public static String GUEST_ROLE_TITLE_DE = STATIC.FLAG_DE + " Willkommen";
+	public static String GUEST_ROLE_TITLE_EN = STATIC.FLAG_GB + " Welcome"; 
 	
 	public static String GUEST_ROLE_ADDED_DE = "Du hast nun die Gastrolle zugewiesen bekommen und kannst dich eingeschränkt in den Kanälen bewegen.\nBitte gib noch **"+STATIC.PREFIX+"rules_de** ein um dir unsere Communityregeln anzuschauen!\n\nViel Spaß bei uns!";
 	public static String GUEST_ROLE_ADDED_EN = "You just obtained the guest role and you are now allowed to use our Text- and Voice-Channels to communicate with us.\nPlease type **"+STATIC.PREFIX+"rules_en** to read our Communityrules!\n\nEnjoy your stay!";

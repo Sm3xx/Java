@@ -3,7 +3,7 @@ package commands;
 import java.awt.Color;
 
 import core.Main;
-import core.embedBuilder;
+import core.MessageBuilder;
 import core.Logger;
 import core.ErrorHandler;
 import net.dv8tion.jda.core.entities.Member;
@@ -11,7 +11,7 @@ import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import util.RULES;
 
-public class rulesEN implements Command{
+public class Rules_en implements ICommand{
 
 	@Override
 	public boolean called(String[] args, MessageReceivedEvent event) {
@@ -30,12 +30,12 @@ public class rulesEN implements Command{
 	public boolean action(String[] args, MessageReceivedEvent event) {
 		
 		try {
-			MessageEmbed msg = embedBuilder.buildEmbed(RULES.EN_TITLE, RULES.EN, Color.WHITE, true);
+			MessageEmbed msg = MessageBuilder.buildEmbed(RULES.EN_TITLE, RULES.EN, Color.WHITE, true);
 			if (event.getPrivateChannel() != null) {
 				event.getChannel().sendMessage(msg).queue();
 			} else {
 				Member member = Main.getGuildMember(event.getAuthor());
-				Main.sendPrivateMessage(member.getUser(), msg, "Rules_en");
+				MessageBuilder.sendPrivateMessage(member.getUser(), msg, "Rules_en");
 			}
 			return true;
 		} catch (Exception e ) {

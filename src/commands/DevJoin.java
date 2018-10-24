@@ -3,20 +3,23 @@ package commands;
 import java.awt.Color;
 
 import core.Main;
-import core.embedBuilder;
+import core.MessageBuilder;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import util.MESSAGES;
+import util.PERMISSIONS;
 import util.STATIC;
 
-public class devJoin implements Command{
+public class DevJoin implements ICommand{
 
 	@Override
 	public boolean called(String[] args, MessageReceivedEvent event) {
-		// TODO Auto-generated method stub
-		return false;
+		if (Main.checkPermission(event.getMember(), PERMISSIONS.DEV)) {
+			return false;			
+		}
+		return true;
 	}
 
 	@Override
@@ -34,13 +37,13 @@ public class devJoin implements Command{
 		TextChannel waiting = Main.getChannel(STATIC.WAITING_ROOM, event.getGuild());
 		
 		String username = Main.getUserName(event.getMember());
-		MessageEmbed content = embedBuilder.buildEmbed("Willkommen "+username, MESSAGES.WAITING_ROOM_DE, "Welcome "+username, MESSAGES.WAITING_ROOM_EN, Color.WHITE, true);
+		MessageEmbed content = MessageBuilder.buildEmbed("Willkommen "+username, MESSAGES.WAITING_ROOM_DE, "Welcome "+username, MESSAGES.WAITING_ROOM_EN, Color.WHITE, true);
 		waiting.sendMessage(event.getMember().getAsMention()+" joined").queue();
 		waiting.sendMessage(content).queue();
 		
 		
 		String msg = "**" + event.getMember().getEffectiveName() + "** joined!";
-		adminlog.sendMessage(embedBuilder.buildEmbed(STATIC.NEW + " " + Main.getTimestamp(), msg, null, false)).queue();
+		adminlog.sendMessage(MessageBuilder.buildEmbed(STATIC.NEW + " " + Main.getTimestamp(), msg, null, false)).queue();
 		return true;
 	}
 

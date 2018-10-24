@@ -1,12 +1,13 @@
 package listeners;
 
 import java.awt.Color;
+
+import containers.ExceptionContainer;
 import core.ErrorHandler;
-import core.ExceptionContainer;
 import core.Logger;
 import core.Main;
-import core.embedBuilder;
-import core.roleHandler;
+import core.MessageBuilder;
+import core.RoleHandler;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.guild.member.GuildMemberNickChangeEvent;
@@ -15,7 +16,7 @@ import util.MESSAGES;
 import util.ROLES;
 import util.STATIC;
 
-public class nicknameChangeListener extends ListenerAdapter{
+public class NicknameChangeListener extends ListenerAdapter{
 
 	public void onGuildMemberNickChange(GuildMemberNickChangeEvent event) {		
 		TextChannel channel = Main.getChannel(STATIC.ADMIN_LOG, event.getGuild());
@@ -27,7 +28,7 @@ public class nicknameChangeListener extends ListenerAdapter{
 		
 		String msg = "**" + prevNick + "**" + " changed his name to **" + newNick + "**";			
 		
-		channel.sendMessage(embedBuilder.buildEmbed(STATIC.INFO + " "+Main.getTimestamp(), msg, null, false)).queue();
+		channel.sendMessage(MessageBuilder.buildEmbed(STATIC.INFO + " "+Main.getTimestamp(), msg, null, false)).queue();
 		
 		// Checking if user is a new User
 		if (Main.checkNewMember(event.getGuild(), event.getMember())) {
@@ -35,10 +36,10 @@ public class nicknameChangeListener extends ListenerAdapter{
 				if (newNick.contains("|")) {
 					String[] name = newNick.split(" ");
 					if (name.length >= 3) {
-						ExceptionContainer error = roleHandler.addRole(event.getGuild(), event.getMember(), ROLES.GUEST);
+						ExceptionContainer error = RoleHandler.addRole(event.getGuild(), event.getMember(), ROLES.GUEST);
 						if (error == null) {
-							MessageEmbed message = embedBuilder.buildEmbed(Main.createTitle(STATIC.FLAG_DE, MESSAGES.GUEST_ROLE_TITLE_DE+" "+newNick), MESSAGES.GUEST_ROLE_ADDED_DE, Main.createTitle(STATIC.FLAG_GB, MESSAGES.GUEST_ROLE_TITLE_EN+" "+newNick), MESSAGES.GUEST_ROLE_ADDED_EN, Color.WHITE, true);
-							Main.sendPrivateMessage(event.getUser(), message, "Guest-Role add");
+							MessageEmbed message = MessageBuilder.buildEmbed(MESSAGES.GUEST_ROLE_TITLE_DE+" "+newNick, MESSAGES.GUEST_ROLE_ADDED_DE, Main.createTitle(STATIC.FLAG_GB, MESSAGES.GUEST_ROLE_TITLE_EN+" "+newNick), MESSAGES.GUEST_ROLE_ADDED_EN, Color.WHITE, true);
+							MessageBuilder.sendPrivateMessage(event.getUser(), message, "Guest-Role add");
 						} else {
 							Logger.error(error.getMessage());;
 						}

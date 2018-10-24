@@ -2,14 +2,15 @@ package commands;
 
 import java.awt.Color;
 
-import core.Logger;
 import core.ErrorHandler;
+import core.Logger;
 import core.Main;
+import core.MessageBuilder;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import util.STATIC;
 
-public class ping implements Command{
+public class Ping implements ICommand{
 
 	@Override
 	public boolean called(String[] args, MessageReceivedEvent event) {
@@ -26,7 +27,7 @@ public class ping implements Command{
 
 	@Override
 	public boolean action(String[] args, MessageReceivedEvent event) {
-		Main.sendInformationMessage(event.getChannel(), Color.green, "Pong! "+STATIC.PING_PONG, 5000);
+		MessageBuilder.sendInformationMessage(event.getChannel(), Color.green, "Pong! "+STATIC.PING_PONG, 5000);
 		return true;
 	}
 

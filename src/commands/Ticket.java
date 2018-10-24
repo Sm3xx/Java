@@ -10,7 +10,7 @@ import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import util.MESSAGES;
 
-public class ticket implements Command{
+public class Ticket implements ICommand{
 
 	@Override
 	public boolean called(String[] args, MessageReceivedEvent event) {

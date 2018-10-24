@@ -1,4 +1,4 @@
-package core;
+package containers;
 
 public class ExceptionContainer {
 	
