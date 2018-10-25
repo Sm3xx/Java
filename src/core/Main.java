@@ -4,8 +4,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import commands.DevJoin;
+
 import commands.AddServerRole;
+import commands.DevJoin;
 import commands.Ping;
 import commands.Prune;
 import commands.Rules_de;
@@ -28,6 +29,7 @@ import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
 import util.SECRETS;
 import util.STATIC;
+import util.COMMANDS;
 
 public class Main {
 	
@@ -126,13 +128,13 @@ public class Main {
 	}
 	
 	public static void addCommand() {
-		CommandHandler.registerCommand("ping", new Ping());
-		CommandHandler.registerCommand("asr", new AddServerRole());
 		CommandHandler.registerCommand("join", new DevJoin());
-		CommandHandler.registerCommand("prune", new Prune());
-		CommandHandler.registerCommand("rules_en", new Rules_en());
-		CommandHandler.registerCommand("rules_de", new Rules_de());
-		CommandHandler.registerCommand(new String[] {"ticket", "ticketgta"}, new Ticket());
+		CommandHandler.registerCommand("ping", new Ping("Ping", COMMANDS.PING_syntax, COMMANDS.PING_helptxt));
+		CommandHandler.registerCommand("asr", new AddServerRole("AddServerRole", COMMANDS.ASR_syntax, COMMANDS.ASR_helptxt));
+		CommandHandler.registerCommand("prune", new Prune("Prune", COMMANDS.PRUNE_syntax, COMMANDS.PRUNE_helptxt));
+		CommandHandler.registerCommand("rules_en", new Rules_en("Rules_en", COMMANDS.RULES_syntax, COMMANDS.RULES_helptxt));
+		CommandHandler.registerCommand("rules_de", new Rules_de("Rules_de", COMMANDS.RULES_syntax, COMMANDS.RULES_helptxt));
+		CommandHandler.registerCommand(new String[] {"ticket", "ticketgta"}, new Ticket("Ticket", COMMANDS.TICKET_syntax, COMMANDS.TICKET_helptxt));
 	}
 	
 	public static void addListeners() {

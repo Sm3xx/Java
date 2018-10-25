@@ -46,8 +46,8 @@ public class MESSAGES {
 	public static String GUEST_ROLE_TITLE_DE = STATIC.FLAG_DE + " Willkommen";
 	public static String GUEST_ROLE_TITLE_EN = STATIC.FLAG_GB + " Welcome"; 
 	
-	public static String GUEST_ROLE_ADDED_DE = "Du hast nun die Gastrolle zugewiesen bekommen und kannst dich eingeschränkt in den Kanälen bewegen.\nBitte gib noch **"+STATIC.PREFIX+"rules_de** ein um dir unsere Communityregeln anzuschauen!\n\nViel Spaß bei uns!";
-	public static String GUEST_ROLE_ADDED_EN = "You just obtained the guest role and you are now allowed to use our Text- and Voice-Channels to communicate with us.\nPlease type **"+STATIC.PREFIX+"rules_en** to read our Communityrules!\n\nEnjoy your stay!";
+	public static String GUEST_ROLE_ADDED_DE = "Du hast nun die Gastrolle zugewiesen bekommen und kannst dich eingeschränkt in den Kanälen bewegen.\nBitte klick noch auf " + STATIC.BOOK_BLUE + " um dir unsere Communityregeln anzuschauen!\n\nViel Spaß bei uns!";
+	public static String GUEST_ROLE_ADDED_EN = "You just obtained the guest role and you are now allowed to use our Text- and Voice-Channels to communicate with us.\nPlease click on " + STATIC.BOOK_RED + " to read our Communityrules!\n\nEnjoy your stay!";
 	
 	
 	// TICKET MESSAGE

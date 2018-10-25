@@ -13,6 +13,7 @@ import net.dv8tion.jda.core.events.message.react.MessageReactionAddEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 import util.MESSAGES;
 import util.ROLES;
+import util.RULES;
 import util.STATIC;
 
 public class ReactionAddListener extends ListenerAdapter{
@@ -62,7 +63,16 @@ public class ReactionAddListener extends ListenerAdapter{
 				}
 				
 				
-				
+			}
+			
+			// German Rules
+			if (emote.equalsIgnoreCase(STATIC.BOOK_BLUE)) {
+					MessageBuilder.sendPrivateMessage(event.getUser(), MessageBuilder.buildEmbed(RULES.DE_TITLE, RULES.DE, Color.WHITE, true), "Rules DE");
+			}
+			
+			// English Rules
+			if (emote.equalsIgnoreCase(STATIC.BOOK_RED)) {
+					MessageBuilder.sendPrivateMessage(event.getUser(), MessageBuilder.buildEmbed(RULES.EN_TITLE, RULES.EN, Color.WHITE, true), "Rules DE");
 			}
 		}
 		

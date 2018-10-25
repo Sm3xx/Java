@@ -15,12 +15,19 @@ import util.PERMISSIONS;
 import util.STATIC;
 
 public class Prune implements ICommand{
-	
+	private int count = 0;
 	private EmbedBuilder error = new EmbedBuilder().setColor(Color.red); 
 	
-	private int count = 0;
+	private String cmdName;
+	private String syntax;
+	private String helpTxt;
 	
-	// if this returns true the command will not be executed
+	public Prune (String cmdName, String syntax, String helptxt) {
+		this.cmdName = cmdName;
+		this.syntax = syntax;
+		this.helpTxt = helptxt;
+	}
+	
 	@Override
 	public boolean called(String[] args, MessageReceivedEvent event) {
 		if (args.length > 0) {
@@ -71,7 +78,7 @@ public class Prune implements ICommand{
 	@Override
 	public void executed(boolean success, MessageReceivedEvent event) {
 		String name = Main.getUserName(Main.getGuildMember(event.getAuthor()));
-		Logger.command("Prune called by "+name+" [Executed: "+success+"]");
+		Logger.command(this.cmdName + " called by "+name+" [Executed: "+success+"]");
 		
 		if (success) {
 			Logger.info(count + " messages deleted!");
@@ -87,7 +94,7 @@ public class Prune implements ICommand{
 	@Override
 	public void error(boolean success, MessageReceivedEvent event) {
 		String name = Main.getUserName(Main.getGuildMember(event.getAuthor()));
-		Logger.error("Prune called by "+name+" [Executed: "+success+"]");
+		Logger.error(this.cmdName+ " called by "+name+" [Executed: "+success+"]");
 		
 		MessageBuilder.sendInformationMessage(event.getTextChannel(), Color.red, "Only Messages not older than 14 Days are deleteable.", 10000);
 		
@@ -95,8 +102,8 @@ public class Prune implements ICommand{
 	
 	@Override
 	public String help(MessageReceivedEvent event) {
-		event.getChannel().sendMessage(error.setTitle("Syntax: /prune <MessageCount>").setDescription("Delete multiple messages in one channel at once").build()).queue();
-		Logger.info("Prune help called by "+Main.getUserName(Main.getGuildMember(event.getAuthor())));
+		event.getChannel().sendMessage(error.setTitle("Syntax: "+this.syntax).setDescription(this.helpTxt).build()).queue();
+		Logger.info(this.cmdName + " help called by "+Main.getUserName(Main.getGuildMember(event.getAuthor())));
 		return null;
 	}
 	
@@ -106,7 +113,6 @@ public class Prune implements ICommand{
 		try {
 			return Integer.parseInt(string);
 		} catch (Exception e) {
-			e.printStackTrace();
 			return 0;
 		}
 	}

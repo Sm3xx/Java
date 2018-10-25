@@ -4,10 +4,10 @@ public class STATIC {
 	
 	
 	//	STATICS
-	public static final String VERSION = "1.3.2";
+	public static final String VERSION = "1.3.3";
 	
+	public static String SERVERID = "411546498493579275";	
 	public static final String PREFIX = "/";	
-	public static final String SERVERID = "411546498493579275";	
 	public static final String TAG = "-vg-";
 	public static final String[] DEVELOPERS = {"282582885381177347"};
 	public static final String FOOTER = "Bot developed by Veteran-Gaming";
@@ -39,6 +39,8 @@ public class STATIC {
 	public static final String HELP_RED = "❓";
 	public static final String FIVE = "5⃣";
 	public static final String PING_PONG = "🏓";
+	public static final String BOOK_BLUE = "📘";
+	public static final String BOOK_RED  = "📕";
 	
 	
 	// CONSOLE COLORS

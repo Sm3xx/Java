@@ -13,9 +13,7 @@ public class CommandHandler {
 	public static void handleCommand(CommandParser.commandContainer cmd) {
 		
 		if (commands.containsKey(cmd.invoke)) {
-			
 			boolean safe = !commands.get(cmd.invoke).called(cmd.args, cmd.event);
-			
 			if (safe) {
 				boolean success = commands.get(cmd.invoke).action(cmd.args, cmd.event);
 				if (success) {
@@ -26,7 +24,6 @@ public class CommandHandler {
 			} else {
 				commands.get(cmd.invoke).executed(safe, cmd.event);
 			}
-			
 		} else {
 			Logger.command("Command \""+cmd.invoke+"\" does not exist!");
 			MessageBuilder.sendInformationMessage(cmd.event.getTextChannel(), Color.red, "Command \""+cmd.invoke+"\" does not exist!", 5000);

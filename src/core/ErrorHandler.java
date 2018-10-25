@@ -12,8 +12,6 @@ import util.STATIC;
 public class ErrorHandler {
 
 	public static void sendErr(User user, String message_de, String message_en, String errorType) {
-		message_de = message_de.replaceAll("&prefix&", STATIC.PREFIX); 
-		message_en = message_en.replaceAll("&prefix&", STATIC.PREFIX);
 		String title_de = Main.createTitle(STATIC.FLAG_DE, MESSAGES.ERROR_TITLE_DE);
 		String title_en = Main.createTitle(STATIC.FLAG_GB, MESSAGES.ERROR_TITLE_EN);
 		MessageBuilder.sendPrivateMessage(user, MessageBuilder.buildEmbed(title_de , message_de, title_en, message_en, Color.RED, true), errorType);

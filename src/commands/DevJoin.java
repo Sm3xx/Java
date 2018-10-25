@@ -1,7 +1,6 @@
 package commands;
 
 import java.awt.Color;
-
 import core.Main;
 import core.MessageBuilder;
 import net.dv8tion.jda.core.EmbedBuilder;

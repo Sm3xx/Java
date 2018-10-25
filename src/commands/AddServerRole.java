@@ -8,6 +8,7 @@ import core.Logger;
 import core.Main;
 import core.MessageBuilder;
 import core.RoleHandler;
+import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import util.PERMISSIONS;
@@ -16,6 +17,17 @@ public class AddServerRole implements ICommand{
 
 	private String rolename = "";
 	private ExceptionContainer ex;
+	private EmbedBuilder error = new EmbedBuilder().setColor(Color.red); 
+	
+	private String cmdName;
+	private String syntax;
+	private String helpTxt;
+	
+	public AddServerRole (String cmdName, String syntax, String helptxt) {
+		this.cmdName = cmdName;
+		this.syntax = syntax;
+		this.helpTxt = helptxt;
+	}
 	
 	@Override
 	public boolean called(String[] args, MessageReceivedEvent event) {
@@ -52,6 +64,9 @@ public class AddServerRole implements ICommand{
 
 	@Override
 	public void executed(boolean success, MessageReceivedEvent event) {
+		String name = Main.getUserName(Main.getGuildMember(event.getAuthor()));
+		Logger.command(this.cmdName + " called by "+name+" [Executed: "+success+"]");
+		
 		if (success) {
 			MessageBuilder.sendInformationMessage(event.getChannel(), Color.WHITE, rolename + " added to all members");
 		}
@@ -59,12 +74,16 @@ public class AddServerRole implements ICommand{
 
 	@Override
 	public void error(boolean success, MessageReceivedEvent event) {
+		String name = Main.getUserName(Main.getGuildMember(event.getAuthor()));
+		Logger.error(this.cmdName+ " called by "+name+" [Executed: "+success+"]");
+		
 		MessageBuilder.sendInformationMessage(event.getChannel(), Color.RED, "An error occured while executing this command.\n\n**[ErrorMessage]**\n" + ex.getMessage());		
 	}
 
 	@Override
 	public String help(MessageReceivedEvent event) {
-		// TODO Auto-generated method stub
+		event.getChannel().sendMessage(error.setTitle("Syntax: "+this.syntax).setDescription(this.helpTxt).build()).queue();
+		Logger.info(this.cmdName + " help called by "+Main.getUserName(Main.getGuildMember(event.getAuthor())));
 		return null;
 	}
 	

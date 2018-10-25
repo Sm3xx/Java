@@ -5,13 +5,25 @@ import java.awt.Color;
 import core.Main;
 import core.MessageBuilder;
 import core.Logger;
-import core.ErrorHandler;
+import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import util.RULES;
 
 public class Rules_en implements ICommand{
+	
+	private EmbedBuilder error = new EmbedBuilder().setColor(Color.red); 
+	
+	private String cmdName;
+	private String syntax;
+	private String helpTxt;
+	
+	public Rules_en (String cmdName, String syntax, String helptxt) {
+		this.cmdName = cmdName;
+		this.syntax = syntax;
+		this.helpTxt = helptxt;
+	}
 
 	@Override
 	public boolean called(String[] args, MessageReceivedEvent event) {
@@ -35,7 +47,7 @@ public class Rules_en implements ICommand{
 				event.getChannel().sendMessage(msg).queue();
 			} else {
 				Member member = Main.getGuildMember(event.getAuthor());
-				MessageBuilder.sendPrivateMessage(member.getUser(), msg, "Rules_en");
+				MessageBuilder.sendPrivateMessage(member.getUser(), msg, this.cmdName);
 			}
 			return true;
 		} catch (Exception e ) {
@@ -47,7 +59,7 @@ public class Rules_en implements ICommand{
 	@Override
 	public void executed(boolean success, MessageReceivedEvent event) {
 		Member member = Main.getGuildMember(event.getAuthor());
-		Logger.command("Rules_en called by "+Main.getUserName(member)+" [Executed: "+success+"]");
+		Logger.command(this.cmdName + " called by "+Main.getUserName(member)+" [Executed: "+success+"]");
 		Logger.message("Rules sent to "+Main.getUserName(member));
 		
 	}
@@ -55,16 +67,13 @@ public class Rules_en implements ICommand{
 	@Override
 	public void error(boolean success, MessageReceivedEvent event) {
 		String name = Main.getUserName(Main.getGuildMember(event.getAuthor()));
-		Logger.error("Rules_en called by "+name+" [Executed: "+success+"]");
-
-		ErrorHandler.cmdErr(event, "Error in runtime - Command: RULES_EN");
-		
-		Logger.message("Errormessage send to "+name);
+		Logger.error(this.cmdName+ " called by "+name+" [Executed: "+success+"]");
 	}
 
 	@Override
 	public String help(MessageReceivedEvent event) {
-		// TODO Auto-generated method stub
+		event.getChannel().sendMessage(error.setTitle("Syntax: "+this.syntax).setDescription(this.helpTxt).build()).queue();
+		Logger.info(this.cmdName + " help called by "+Main.getUserName(Main.getGuildMember(event.getAuthor())));
 		return null;
 	}
 
