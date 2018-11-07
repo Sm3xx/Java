@@ -45,7 +45,7 @@ public class Prune implements ICommand{
 			return true;
 		}
 		
-		if (Main.checkPermission(event.getMember(), PERMISSIONS.PRUNE)) {
+		if (Main.checkPermission(event.getMember(), PERMISSIONS.ADMIN_COMMAND)) {
 			return false;
 		} else {
 			MessageBuilder.sendInformationMessage(event.getChannel(), Color.red, "Missing permissions!", 5000);			

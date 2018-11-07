@@ -33,8 +33,8 @@ public class MESSAGES {
 
 	
 	// NAME CHANGE ERROR
-	public static String ERR_NAMECHANGE_DE = "Falls du deinen Namen geändert hast, kontaktiere bitte einen Admin mit **&prefix&ticket <Nachricht>**, andernfalls überprüfe, ob dein Name den Regeln entspricht und versuche es nochmal.";
-	public static String ERR_NAMECHANGE_EN = "In case you changed your name contact us by typing: **&prefix&ticket <message>**. Otherwise check your name for correct spelling and whether it goes with our rules or not.";
+	public static String ERR_NAMECHANGE_DE = "Falls du deinen Namen geändert hast, kontaktiere bitte einen Admin mit **" + STATIC.PREFIX + "ticket <Nachricht>**, andernfalls überprüfe, ob dein Name den Regeln entspricht und versuche es nochmal.";
+	public static String ERR_NAMECHANGE_EN = "In case you changed your name contact us by typing: **" + STATIC.PREFIX + "ticket <message>**. Otherwise check your name for correct spelling and whether it goes with our rules or not.";
 	
 	public static String REMOVE_TAG_DE = "Das Communitytag **-VG-** ist Mitgliedern unserer Community vorbehalten. Bitte entferne es aus deinem Nicknamen!";
 	public static String REMOVE_TAG_EN = "Only members of our community are allowed to use our Communitytag **-VG-**. Please remove it from your name!";
@@ -72,5 +72,3 @@ public class MESSAGES {
 	public static String MEMBER_JOIN_DE = "Wir freuen uns, dass du weiterhin ein Teil unserer Gemeinschaft sein möchtest und sind stolz dich nun als Fullmember bei Veteran-Gaming willkommen heißen zu dürfen.\nDies bedeutet jedoch auch, dass du unseren Clan nach Außen vertrittst, weshalb wir dich an dieser Stelle nochmal daran erinnern möchten, nichts zu tun, was unserem Ruf oder der Community schaden könnte.\n\nViel Spaß bei uns!";
 	public static String MEMBER_JOIN_EN = "We are happy that you decided to stay with us and we are proud to welcome you as a Fullmember of our Community.\nBut this also means that you are representing us on other Voice-Servers and In-Game. That's why we like to remind you to step back from anything that could hurt our Community's reputation.\n\nEnjoy your stay!";
 }
-
-

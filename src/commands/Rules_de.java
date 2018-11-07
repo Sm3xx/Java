@@ -5,23 +5,15 @@ import java.awt.Color;
 import core.Main;
 import core.MessageBuilder;
 import core.Logger;
-import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import util.RULES;
 
-public class Rules_de implements ICommand{
-	private EmbedBuilder error = new EmbedBuilder().setColor(Color.red); 
+public class Rules_de extends CommandBase implements ICommand{
 	
-	private String cmdName;
-	private String syntax;
-	private String helpTxt;
-	
-	public Rules_de (String cmdName, String syntax, String helptxt) {
-		this.cmdName = cmdName;
-		this.syntax = syntax;
-		this.helpTxt = helptxt;
+	public Rules_de(String cmdName, String syntax, String helptxt) {
+		super(cmdName, syntax, helptxt);
 	}
 
 	@Override
@@ -70,7 +62,7 @@ public class Rules_de implements ICommand{
 
 	@Override
 	public String help(MessageReceivedEvent event) {
-		event.getChannel().sendMessage(error.setTitle("Syntax: "+this.syntax).setDescription(this.helpTxt).build()).queue();
+		event.getChannel().sendMessage(error.setTitle("Syntax: "+syntax).setDescription(helpTxt).build()).queue();
 		Logger.info(this.cmdName + " help called by "+Main.getUserName(Main.getGuildMember(event.getAuthor())));
 		return null;
 	}

@@ -31,7 +31,7 @@ public class AddServerRole implements ICommand{
 	
 	@Override
 	public boolean called(String[] args, MessageReceivedEvent event) {
-		if (Main.checkPermission(event.getMember(), PERMISSIONS.ASR)) {
+		if (Main.checkPermission(event.getMember(), PERMISSIONS.ADMIN_COMMAND)) {
 			if (args.length == 1) {
 				return false;
 			} else {

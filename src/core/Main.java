@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import commands.AddServerRole;
+import commands.AutoChannel;
 import commands.DevJoin;
 import commands.Ping;
 import commands.Prune;
@@ -52,7 +53,11 @@ public class Main {
 				
 		
 	}
-
+	
+	/**
+	 * Returns a Timestamp
+	 * @return String
+	 */
 	public static String getTimestamp() {
 		
 		final DateFormat sdf = new SimpleDateFormat("dd.MM.yyyy || HH:mm");
@@ -60,7 +65,12 @@ public class Main {
 
 		return sdf.format(date);
 	}
-
+	
+	/**
+	 * Get the Nickname of the Member. If the member has no nickname the effective name will be returned.
+	 * @param member
+	 * @return String
+	 */
 	public static String getUserName(Member member) {
 		if (member.getNickname() == null) {
 			return member.getEffectiveName();
@@ -68,12 +78,24 @@ public class Main {
 			return member.getNickname();
 		}
 	}
-
+	
+	/**
+	 * Creates string for the Title field of an embeded Message
+	 * @param emote
+	 * @param titleContent
+	 * @return String
+	 */
 	public static String createTitle(String emote, String titleContent) {	
 		String title = emote + " " + titleContent;
 		return title;
 	}
 	
+	/**
+	 * Get the TextChannel of the guild specified in the channelId
+	 * @param channelId
+	 * @param guild
+	 * @return TextChannel
+	 */
 	public static TextChannel getChannel(String channelId, Guild guild) {
 		List<TextChannel> channelList = guild.getTextChannelsByName(channelId, true);
 		TextChannel channel = channelList.get(0);
@@ -81,6 +103,11 @@ public class Main {
 		return channel;
 	}
 	
+	/**
+	 * Returns the Guild
+	 * @param user
+	 * @return guild
+	 */
 	public static Guild getGuild(User user) {
 		Guild guild = null;
 		List<Guild> guilds = user.getMutualGuilds();
@@ -93,10 +120,21 @@ public class Main {
 		return guild;
 	}
 	
+	/**
+	 * get a member of a guild
+	 * @param user
+	 * @return Member
+	 */
 	public static Member getGuildMember(User user) {
 		return getGuild(user).getMemberById(user.getId());
 	}
 
+	/**
+	 * Check if given Member has any Roles on the Discord server (if the user is new on the Server) 
+	 * @param guild
+	 * @param member
+	 * @return true/false
+	 */
 	public static boolean checkNewMember(Guild guild, Member member) {
 		List<Role> serverRoles = guild.getRoles();
 		List<Role> userRoles = member.getRoles();
@@ -115,6 +153,12 @@ public class Main {
 		else return true;
 	}
 	
+	/**
+	 * Check if the given Member has the permission to execute the following code
+	 * @param member
+	 * @param permissions
+	 * @return true/false
+	 */
 	public static boolean checkPermission(Member member, String[] permissions) {
 		List<Role> roleList = member.getRoles();
 		for (String p : permissions) {
@@ -134,6 +178,7 @@ public class Main {
 		CommandHandler.registerCommand("prune", new Prune("Prune", COMMANDS.PRUNE_syntax, COMMANDS.PRUNE_helptxt));
 		CommandHandler.registerCommand("rules_en", new Rules_en("Rules_en", COMMANDS.RULES_syntax, COMMANDS.RULES_helptxt));
 		CommandHandler.registerCommand("rules_de", new Rules_de("Rules_de", COMMANDS.RULES_syntax, COMMANDS.RULES_helptxt));
+		CommandHandler.registerCommand(new String[] {"autochannel", "ac"}, new AutoChannel("AutoChannel", null, null)); // TODO command to show all autochannels
 		CommandHandler.registerCommand(new String[] {"ticket", "ticketgta"}, new Ticket("Ticket", COMMANDS.TICKET_syntax, COMMANDS.TICKET_helptxt));
 	}
 	
