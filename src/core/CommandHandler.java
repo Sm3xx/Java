@@ -3,7 +3,7 @@ package core;
 import java.awt.Color;
 import java.util.HashMap;
 
-import commands.ICommand;
+import commands.core.ICommand;
 
 public class CommandHandler {
 

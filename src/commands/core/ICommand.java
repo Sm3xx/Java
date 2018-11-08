@@ -1,4 +1,4 @@
-package commands;
+package commands.core;
 
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -27,6 +27,5 @@ public interface ICommand {
 	 */
 	void executed(boolean success, MessageReceivedEvent event);
 	void error(boolean success, MessageReceivedEvent event);
-	String help(MessageReceivedEvent event);
 
 }

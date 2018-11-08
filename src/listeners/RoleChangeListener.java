@@ -55,15 +55,15 @@ public class RoleChangeListener extends ListenerAdapter{
     	MessageEmbed message = null;
     	String title_de = STATIC.PARTY+" "+MESSAGES.JOIN_TITLE_DE+" "+STATIC.PARTY;
     	String title_en = STATIC.PARTY+" "+MESSAGES.JOIN_TITLE_EN+" "+STATIC.PARTY;
-    	switch (rolename) {
-    		case ROLES.MEMBER:
-    			message = MessageBuilder.buildEmbed(title_de, MESSAGES.MEMBER_JOIN_DE, title_en, MESSAGES.MEMBER_JOIN_EN, Color.WHITE, true);
-    			sendWelcomeMessage(message, event);
-    			break;
-    		case ROLES.TRIALMEMBER:
-    			message = MessageBuilder.buildEmbed(title_de, MESSAGES.TRIAL_JOIN_DE, title_en, MESSAGES.TRIAL_JOIN_EN, Color.WHITE, true);
-    			sendWelcomeMessage(message, event);
-    			break;
+    	
+    	if (rolename == ROLES.MEMBER) {
+			message = MessageBuilder.buildEmbed(title_de, MESSAGES.MEMBER_JOIN_DE, title_en, MESSAGES.MEMBER_JOIN_EN, Color.WHITE, true);
+			sendWelcomeMessage(message, event);
+    	}
+    	
+    	if (rolename == ROLES.TRIALMEMBER) {
+			message = MessageBuilder.buildEmbed(title_de, MESSAGES.TRIAL_JOIN_DE, title_en, MESSAGES.TRIAL_JOIN_EN, Color.WHITE, true);
+			sendWelcomeMessage(message, event);
     	}
     }
 	

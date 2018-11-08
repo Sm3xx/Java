@@ -2,38 +2,22 @@ package commands;
 
 import java.awt.Color;
 
+import commands.core.CommandBase;
+import commands.core.ICommand;
 import core.Logger;
 import core.Main;
 import core.MessageBuilder;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import util.STATIC;
 
-public class Ping implements ICommand{
-	
-	private EmbedBuilder error = new EmbedBuilder().setColor(Color.red); 
-	
-	private String cmdName;
-	private String syntax;
-	private String helpTxt;
+public class Ping extends CommandBase implements ICommand{
 	
 	public Ping (String cmdName, String syntax, String helptxt) {
-		this.cmdName = cmdName;
-		this.syntax = syntax;
-		this.helpTxt = helptxt;
+		super(cmdName, syntax, helptxt);
 	}
 
 	@Override
 	public boolean called(String[] args, MessageReceivedEvent event) {
-		try {
-			Member member = Main.getGuildMember(event.getAuthor());
-			if (member != null) {
-				return false;
-			}
-		} catch (Exception e) {
-			return true;
-		}
 		return true;
 	}
 
@@ -58,14 +42,5 @@ public class Ping implements ICommand{
 
 		Logger.message("Errormessage send to "+name);
 	}
-
-	@Override
-	public String help(MessageReceivedEvent event) {
-		event.getChannel().sendMessage(error.setTitle("Syntax: "+this.syntax).setDescription(this.helpTxt).build()).queue();
-		Logger.info(this.cmdName + " help called by "+Main.getUserName(Main.getGuildMember(event.getAuthor())));
-		return null;
-	}
-
-	
 	
 }

@@ -1,7 +1,5 @@
 package listeners;
 
-import java.awt.Color;
-
 import containers.ExceptionContainer;
 import core.Main;
 import core.MessageBuilder;
@@ -23,7 +21,7 @@ public class ReactionAddListener extends ListenerAdapter{
 		String emote = event.getReaction().getReactionEmote().getName();
 		Guild guild = Main.getGuild(event.getUser());
 		Member member = guild.getMemberById(event.getUser().getId());
-		EmbedBuilder builder = new EmbedBuilder().setColor(Color.WHITE).setFooter(STATIC.FOOTER, null);
+		EmbedBuilder builder = new EmbedBuilder().setColor(STATIC.EMBED_COLOR).setFooter(STATIC.FOOTER, null);
 		
 		// registration Process
 		if (event.getReaction().getPrivateChannel() != null && !event.getUser().isBot()) {
@@ -58,7 +56,7 @@ public class ReactionAddListener extends ListenerAdapter{
 				if (emote.equalsIgnoreCase(STATIC.GTA)) {
 					ExceptionContainer error = RoleHandler.addRole(guild, member, ROLES.GTA_ROLEPLAY_GUEST);
 					if (error == null) {
-						MessageBuilder.sendPrivateMessage(event.getUser(), MessageBuilder.buildEmbed(MESSAGES.CONFIRMATION_TITLE_DE, MESSAGES.GTA_ROLE_ADDED, Color.GREEN, true), "Role-Add");
+						MessageBuilder.sendPrivateMessage(event.getUser(), MessageBuilder.buildEmbed(MESSAGES.CONFIRMATION_TITLE_DE, MESSAGES.GTA_ROLE_ADDED, STATIC.EMBED_COLOR, true), "Role-Add");
 					}
 				}
 				
@@ -67,12 +65,12 @@ public class ReactionAddListener extends ListenerAdapter{
 			
 			// German Rules
 			if (emote.equalsIgnoreCase(STATIC.BOOK_BLUE)) {
-					MessageBuilder.sendPrivateMessage(event.getUser(), MessageBuilder.buildEmbed(RULES.DE_TITLE, RULES.DE, Color.WHITE, true), "Rules DE");
+					MessageBuilder.sendPrivateMessage(event.getUser(), MessageBuilder.buildEmbed(RULES.DE_TITLE, RULES.DE, STATIC.EMBED_COLOR, true), "Rules DE");
 			}
 			
 			// English Rules
 			if (emote.equalsIgnoreCase(STATIC.BOOK_RED)) {
-					MessageBuilder.sendPrivateMessage(event.getUser(), MessageBuilder.buildEmbed(RULES.EN_TITLE, RULES.EN, Color.WHITE, true), "Rules DE");
+					MessageBuilder.sendPrivateMessage(event.getUser(), MessageBuilder.buildEmbed(RULES.EN_TITLE, RULES.EN, STATIC.EMBED_COLOR, true), "Rules DE");
 			}
 		}
 		

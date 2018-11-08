@@ -3,10 +3,11 @@ package commands;
 import java.awt.Color;
 import java.util.List;
 
+import commands.core.CommandBase;
+import commands.core.ICommand;
 import core.Logger;
 import core.Main;
 import core.MessageBuilder;
-import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageHistory;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -14,29 +15,16 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import util.PERMISSIONS;
 import util.STATIC;
 
-public class Prune implements ICommand{
+public class Prune extends CommandBase implements ICommand{
 	private int count = 0;
-	private EmbedBuilder error = new EmbedBuilder().setColor(Color.red); 
-	
-	private String cmdName;
-	private String syntax;
-	private String helpTxt;
 	
 	public Prune (String cmdName, String syntax, String helptxt) {
-		this.cmdName = cmdName;
-		this.syntax = syntax;
-		this.helpTxt = helptxt;
+		super(cmdName, syntax, helptxt);
 	}
 	
 	@Override
 	public boolean called(String[] args, MessageReceivedEvent event) {
-		if (args.length > 0) {
-			if (args[0].equalsIgnoreCase("help") || args[0].equalsIgnoreCase("?")) {
-				help(event);
-				return true;
-			}
-		} else {
-			help(event);
+		if(calledHelp(args, event)) {
 			return true;
 		}
 		
@@ -99,14 +87,6 @@ public class Prune implements ICommand{
 		MessageBuilder.sendInformationMessage(event.getTextChannel(), Color.red, "Only Messages not older than 14 Days are deleteable.", 10000);
 		
 	}
-	
-	@Override
-	public String help(MessageReceivedEvent event) {
-		event.getChannel().sendMessage(error.setTitle("Syntax: "+this.syntax).setDescription(this.helpTxt).build()).queue();
-		Logger.info(this.cmdName + " help called by "+Main.getUserName(Main.getGuildMember(event.getAuthor())));
-		return null;
-	}
-	
 	
 	
 	private int getCount(String string) {

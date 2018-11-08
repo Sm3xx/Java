@@ -1,7 +1,5 @@
 package listeners;
 
-import java.awt.Color;
-
 import containers.ExceptionContainer;
 import core.ErrorHandler;
 import core.Logger;
@@ -38,8 +36,7 @@ public class NicknameChangeListener extends ListenerAdapter{
 					if (name.length >= 3) {
 						ExceptionContainer error = RoleHandler.addRole(event.getGuild(), event.getMember(), ROLES.GUEST);
 						if (error == null) {
-							MessageEmbed message = MessageBuilder.buildEmbed(MESSAGES.GUEST_ROLE_TITLE_DE+" "+newNick, MESSAGES.GUEST_ROLE_ADDED_DE, MESSAGES.GUEST_ROLE_TITLE_EN+" "+newNick, MESSAGES.GUEST_ROLE_ADDED_EN, Color.WHITE, true);
-//							MessageBuilder.sendPrivateMessage(event.getUser(), message, "Guest-Role add");
+							MessageEmbed message = MessageBuilder.buildEmbed(MESSAGES.GUEST_ROLE_TITLE_DE+" "+newNick, MESSAGES.GUEST_ROLE_ADDED_DE, MESSAGES.GUEST_ROLE_TITLE_EN+" "+newNick, MESSAGES.GUEST_ROLE_ADDED_EN, STATIC.EMBED_COLOR, true);
 							MessageBuilder.sendReactionMessage(event.getUser(), message, new String[] {STATIC.BOOK_BLUE, STATIC.BOOK_RED});
 						} else {
 							Logger.error(error.getMessage());;

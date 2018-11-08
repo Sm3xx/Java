@@ -1,20 +1,20 @@
 package util;
 
-import java.util.HashMap;
-
-import net.dv8tion.jda.core.entities.Guild;
+import java.awt.Color;
 
 public class STATIC {
 	
 	
 	//	STATICS
-	public static final String VERSION = "1.4.0";
+	public static final String VERSION = "1.4.2";
 	
 	public static String SERVERID = "411546498493579275";	
 	public static final String PREFIX = "/";	
 	public static final String TAG = "-vg-";
 	public static final String[] DEVELOPERS = {"282582885381177347"};
 	public static final String FOOTER = "Bot developed by Veteran-Gaming";
+	
+	public static final Color EMBED_COLOR = new Color(34, 87, 193);
 	
 	
 	//	CHANNELS
@@ -23,8 +23,6 @@ public class STATIC {
 	public static final String GTA_TICKETS = "tickets-gta";
 	public static final String GTA_TICKETS_DUMP = "gtaticket-dump";
 	public static final String WAITING_ROOM = "waiting";
-	
-	public static HashMap<String, Guild> autochannels = new HashMap<>();
 	
 	
 	// 	EMOTES
@@ -37,7 +35,8 @@ public class STATIC {
 	public static final String FLAG_GB = "🇬🇧";	
 	public static final String BANGBANG = "‼";	
 	public static final String CONTROLLER = "🎮";	
-	public static final String WHITE_SQUARE = "▫";	
+	public static final String WHITE_SQUARE = "▫";
+	public static final String BLACK_SMALL_SQUARE = "▪";
 	public static final String PARTY = "🎉";
 	public static final String VG = "1⃣";
 	public static final String GTA = "2⃣";
