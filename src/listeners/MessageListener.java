@@ -1,9 +1,9 @@
 package listeners;
 
-import core.CommandHandler;
-import core.CommandParser;
-import core.Main;
+import commands.core.CommandHandler;
+import commands.core.CommandParser;
 import core.MessageBuilder;
+import core.handlers.GuildHandler;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
@@ -17,13 +17,15 @@ public class MessageListener extends ListenerAdapter{
 			CommandHandler.handleCommand(CommandParser.parser(event.getMessage().getContentDisplay().toLowerCase(), event));
 		}
 		
-		if (event.getChannel().getName().equalsIgnoreCase(STATIC.GTA_TICKETS_DUMP) && event.getAuthor().isBot()) {
-			String msg = event.getMessage().getContentDisplay();
-			String author = event.getAuthor().getName();
-			msg = msg.replace("/ticketgta", "");
-			
-			MessageEmbed message = MessageBuilder.buildTicket(msg.split(" "), author, STATIC.FIVE);
-			Main.getChannel(STATIC.GTA_TICKETS, event.getGuild()).sendMessage(message).queue();
+		if (STATIC.ACTIVE_TICKET_BOT) {
+			if (event.getChannel().getName().equalsIgnoreCase(STATIC.GTA_TICKETS_DUMP) && event.getAuthor().isBot()) {
+				String msg = event.getMessage().getContentDisplay();
+				String author = event.getAuthor().getName();
+				msg = msg.replace("/ticketgta", "");
+				
+				MessageEmbed message = MessageBuilder.buildTicket(msg.split(" "), author, STATIC.FIVE);
+				GuildHandler.getChannel(STATIC.GTA_TICKETS).sendMessage(message).queue();
+			}
 		}
 		
 	}

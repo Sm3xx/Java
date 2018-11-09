@@ -1,29 +1,21 @@
 package commands;
 
-import commands.core.CommandBase;
 import commands.core.ICommand;
-import listeners.MemberJoinListener;
+import core.Main;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import util.PERMISSIONS;
 
-public class DevJoin extends CommandBase implements ICommand{
-
-	public DevJoin(String cmdName, String syntax, String helptxt) {
-		super(cmdName, syntax, helptxt);
-	}
+public class Test implements ICommand{
 
 	@Override
 	public boolean called(String[] args, MessageReceivedEvent event) {
-		if (checkPermission(event.getMember(), PERMISSIONS.DEV)) {
-			return false;			
-		}
-		return true;
+		System.out.println(Main.getJDA().getGuilds().get(0).getName());
+		return false;
 	}
 
 	@Override
 	public boolean action(String[] args, MessageReceivedEvent event) {
-		MemberJoinListener.execJoinEvent(event.getMember(), event.getGuild());
-		return true;
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override

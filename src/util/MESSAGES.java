@@ -50,6 +50,9 @@ public class MESSAGES {
 	public static String GUEST_ROLE_ADDED_EN = "You just obtained the guest role and you are now allowed to use our Text- and Voice-Channels to communicate with us.\nPlease click on " + STATIC.BOOK_RED + " to read our Communityrules!\n\nEnjoy your stay!";
 	
 	
+	// ROLE ADD ERROR
+	public static String ROLE_ADD_ERROR = "Es ist ein Problem bei der Rollenvergabe aufgetreten. Bitte kontaktiere einen Admin oder Moderator, damit dir die richtige Rolle zugewiesen werden kann.";
+	
 	// TICKET MESSAGE
 	public static String TICKET_MESSAGE_DE = "Um ein Ticket zu erstellen, klicke bitte auf den Link.";
 	public static String TICKET_MESSAGE_EN = "To create a new ticket click on the link below.";

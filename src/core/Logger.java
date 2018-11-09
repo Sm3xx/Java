@@ -1,5 +1,9 @@
 package core;
 
+import core.handlers.GuildHandler;
+import net.dv8tion.jda.core.entities.TextChannel;
+import util.STATIC;
+
 public class Logger {
 	
 	public static void info(String message) {
@@ -12,6 +16,13 @@ public class Logger {
 	
 	public static void error(String message) {
 		System.out.println("[ERROR]    -  ["+Main.getTimestamp()+"] "+message);
+		if (STATIC.ERROR_LOG != "") {
+			TextChannel log = GuildHandler.getChannel(STATIC.ERROR_LOG);
+			if (log != null) {
+				String title = STATIC.BANGBANG + " "+ Main.getTimestamp();
+				log.sendMessage(MessageBuilder.buildEmbed(title, message, null, false)).queue();
+			}
+		}
 	}
 	
 	public static void message(String message) {

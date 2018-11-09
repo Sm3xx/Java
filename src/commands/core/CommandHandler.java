@@ -1,9 +1,10 @@
-package core;
+package commands.core;
 
 import java.awt.Color;
 import java.util.HashMap;
 
-import commands.core.ICommand;
+import core.Logger;
+import core.MessageBuilder;
 
 public class CommandHandler {
 

@@ -5,7 +5,6 @@ import java.awt.Color;
 import commands.core.CommandBase;
 import commands.core.ICommand;
 import core.Logger;
-import core.Main;
 import core.MessageBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import util.STATIC;
@@ -29,15 +28,14 @@ public class Ping extends CommandBase implements ICommand{
 
 	@Override
 	public void executed(boolean success, MessageReceivedEvent event) {
-		String name = Main.getUserName(Main.getGuildMember(event.getAuthor()));
-		Logger.command(this.cmdName + " called by "+name+" [Executed: "+success+"]");
+		Logger.command(this.cmdName + " called by "+getUsername(event.getAuthor())+" [Executed: "+success+"]");
 		
 		Logger.info("Answered with pong");
 	}
 	
 	@Override
 	public void error(boolean success, MessageReceivedEvent event) {
-		String name = Main.getUserName(Main.getGuildMember(event.getAuthor()));
+		String name = getUsername(event.getAuthor());
 		Logger.error(this.cmdName+ " called by "+name+" [Executed: "+success+"]");
 
 		Logger.message("Errormessage send to "+name);

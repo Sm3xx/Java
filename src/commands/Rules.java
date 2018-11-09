@@ -3,9 +3,7 @@ package commands;
 import commands.core.CommandBase;
 import commands.core.ICommand;
 import core.Logger;
-import core.Main;
 import core.MessageBuilder;
-import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import util.RULES;
@@ -47,9 +45,9 @@ public class Rules extends CommandBase implements ICommand{
 
 	@Override
 	public void executed(boolean success, MessageReceivedEvent event) {
-		Member member = Main.getGuildMember(event.getAuthor());
-		Logger.command(this.cmdName + " called by "+Main.getUserName(member)+" [Executed: "+success+"]");
-		Logger.message("Rules sent to "+Main.getUserName(member));		
+		String name = getUsername(event.getAuthor());
+		Logger.command(this.cmdName + " called by "+name+" [Executed: "+success+"]");
+		Logger.message("Rules sent to "+name);		
 	}
 
 	@Override

@@ -4,11 +4,11 @@ import java.awt.Color;
 import java.util.List;
 
 import core.Logger;
-import core.Main;
 import core.MessageBuilder;
+import core.handlers.MemberHandler;
+import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.entities.Role;
-import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.guild.member.GuildMemberRoleAddEvent;
 import net.dv8tion.jda.core.events.guild.member.GuildMemberRoleRemoveEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
@@ -17,28 +17,31 @@ import util.ROLES;
 import util.STATIC;
 
 public class RoleChangeListener extends ListenerAdapter{
-
+	
 	// User gets new Role
 	public void onGuildMemberRoleAdd(GuildMemberRoleAddEvent event) {
 		List<Role> roles = event.getRoles();
+		Member m = event.getMember();
 		
-		TextChannel channel = Main.getChannel(STATIC.ADMIN_LOG, event.getGuild());
 		checkRolename(roles.get(0).getName(), event);
 		
-		String msg = createMessage(roles.get(0).getName(), Main.getUserName(event.getMember()), false);
-		MessageBuilder.sendAdminLog(msg, STATIC.CHECKMARK, channel);
-		Logger.info(roles.get(0).getName()+"-Role added to "+Main.getUserName(event.getMember()));
+		String msg = createMessage(roles.get(0).getName(), getName(m), false);
+		MessageBuilder.sendAdminLog(msg, STATIC.CHECKMARK);
+		Logger.info(roles.get(0).getName()+"-Role added to "+getName(m));
 	}
 	
 	// Role removed from user
     public void onGuildMemberRoleRemove(GuildMemberRoleRemoveEvent event) {
     	List<Role> roles = event.getRoles();
+		String name = MemberHandler.getUserName(event.getMember());
 		
-    	TextChannel channel = Main.getChannel(STATIC.ADMIN_LOG, event.getGuild());
-		
-		String msg = createMessage(roles.get(0).getName() ,Main.getUserName(event.getMember()), true);
-		MessageBuilder.sendAdminLog(msg, STATIC.CROSS, channel);
-		Logger.info(roles.get(0).getName()+"-Role removed from "+Main.getUserName(event.getMember()));
+		String msg = createMessage(roles.get(0).getName() , name, true);
+		MessageBuilder.sendAdminLog(msg, STATIC.CROSS);
+		Logger.info(roles.get(0).getName()+"-Role removed from "+name);
+    }
+    
+    private String getName(Member m) {
+    	return MemberHandler.getUserName(m);
     }
     
     // Create the message String for the Admin Log

@@ -8,6 +8,7 @@ import commands.core.ICommand;
 import core.Logger;
 import core.Main;
 import core.MessageBuilder;
+import core.handlers.GuildHandler;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageHistory;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -33,7 +34,7 @@ public class Prune extends CommandBase implements ICommand{
 			return true;
 		}
 		
-		if (Main.checkPermission(event.getMember(), PERMISSIONS.ADMIN_COMMAND)) {
+		if (checkPermission(event.getMember(), PERMISSIONS.ADMIN_COMMAND)) {
 			return false;
 		} else {
 			MessageBuilder.sendInformationMessage(event.getChannel(), Color.red, "Missing permissions!", 5000);			
@@ -65,14 +66,13 @@ public class Prune extends CommandBase implements ICommand{
 
 	@Override
 	public void executed(boolean success, MessageReceivedEvent event) {
-		String name = Main.getUserName(Main.getGuildMember(event.getAuthor()));
-		Logger.command(this.cmdName + " called by "+name+" [Executed: "+success+"]");
+		Logger.command(this.cmdName + " called by "+getUsername(event.getAuthor())+" [Executed: "+success+"]");
 		
 		if (success) {
 			Logger.info(count + " messages deleted!");
 			MessageBuilder.sendInformationMessage(event.getTextChannel(), Color.green, count + " messages deleted!", 5000);
 			
-			TextChannel adminlog = Main.getChannel(STATIC.ADMIN_LOG, event.getGuild());
+			TextChannel adminlog = GuildHandler.getChannel(STATIC.ADMIN_LOG);
 			String message = "**" + event.getMember().getEffectiveName() + "** deleted **"+count+"** Messages in **"+event.getChannel().getName()+"**";
 			adminlog.sendMessage(MessageBuilder.buildEmbed(STATIC.INFO + " " + Main.getTimestamp(), message, null, false)).queue();
 		}
@@ -81,11 +81,8 @@ public class Prune extends CommandBase implements ICommand{
 
 	@Override
 	public void error(boolean success, MessageReceivedEvent event) {
-		String name = Main.getUserName(Main.getGuildMember(event.getAuthor()));
-		Logger.error(this.cmdName+ " called by "+name+" [Executed: "+success+"]");
-		
+		Logger.error(this.cmdName+ " called by "+getUsername(event.getAuthor())+" [Executed: "+success+"]");
 		MessageBuilder.sendInformationMessage(event.getTextChannel(), Color.red, "Only Messages not older than 14 Days are deleteable.", 10000);
-		
 	}
 	
 	

@@ -6,10 +6,8 @@ import java.util.HashMap;
 import commands.core.CommandBase;
 import commands.core.ICommand;
 import core.Logger;
-import core.Main;
 import core.MessageBuilder;
 import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import util.PERMISSIONS;
@@ -44,7 +42,7 @@ public class AutoChannel extends CommandBase implements ICommand{
 		
 		channel = event.getTextChannel();
 		
-		if (Main.checkPermission(event.getMember(), PERMISSIONS.ADMIN_COMMAND)) {
+		if (checkPermission(event.getMember(), PERMISSIONS.ADMIN_COMMAND)) {
 			if (args.length == 2) {
 				String cid = args[1];
 				try {
@@ -123,8 +121,7 @@ public class AutoChannel extends CommandBase implements ICommand{
 				break;
 		}
 		
-		Member member = Main.getGuildMember(event.getAuthor());
-		Logger.command(this.cmdName + " called by "+Main.getUserName(member)+" [Executed: "+success+"]");
+		Logger.command(this.cmdName + " called by "+getUsername(event.getAuthor())+" [Executed: "+success+"]");
 	}
 
 }

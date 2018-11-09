@@ -1,9 +1,12 @@
 package listeners;
 
+import java.awt.Color;
+
 import containers.ExceptionContainer;
-import core.Main;
+import core.Logger;
 import core.MessageBuilder;
-import core.RoleHandler;
+import core.handlers.GuildHandler;
+import core.handlers.RoleHandler;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Member;
@@ -19,13 +22,13 @@ public class ReactionAddListener extends ListenerAdapter{
 	public void onMessageReactionAdd(MessageReactionAddEvent event) {
 		
 		String emote = event.getReaction().getReactionEmote().getName();
-		Guild guild = Main.getGuild(event.getUser());
-		Member member = guild.getMemberById(event.getUser().getId());
+		Guild guild = GuildHandler.getGuild();
+		Member member = GuildHandler.getGuildMember(event.getUser());
 		EmbedBuilder builder = new EmbedBuilder().setColor(STATIC.EMBED_COLOR).setFooter(STATIC.FOOTER, null);
 		
 		// registration Process
 		if (event.getReaction().getPrivateChannel() != null && !event.getUser().isBot()) {
-			if (Main.checkNewMember(guild, Main.getGuildMember(event.getUser()))) {
+			if (GuildHandler.checkNewMember(member)) {
 				
 				// choose interest
 				if (emote.equalsIgnoreCase(STATIC.FLAG_DE)) {
@@ -57,6 +60,10 @@ public class ReactionAddListener extends ListenerAdapter{
 					ExceptionContainer error = RoleHandler.addRole(guild, member, ROLES.GTA_ROLEPLAY_GUEST);
 					if (error == null) {
 						MessageBuilder.sendPrivateMessage(event.getUser(), MessageBuilder.buildEmbed(MESSAGES.CONFIRMATION_TITLE_DE, MESSAGES.GTA_ROLE_ADDED, STATIC.EMBED_COLOR, true), "Role-Add");
+					} else {
+						MessageBuilder.sendPrivateMessage(event.getUser(),  new EmbedBuilder().setDescription(MESSAGES.ROLE_ADD_ERROR).setColor(Color.RED).build(), "Error");
+						Logger.error("ReactionAddListener "+error.getMessage());
+						MessageBuilder.sendAdminLog("ReactionAddListener "+error.getMessage(), STATIC.BANGBANG);
 					}
 				}
 				

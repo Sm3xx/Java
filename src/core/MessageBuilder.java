@@ -5,6 +5,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import containers.MessageContainer;
+import core.handlers.GuildHandler;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageChannel;
@@ -15,6 +16,17 @@ import net.dv8tion.jda.core.entities.User;
 import util.STATIC;
 
 public class MessageBuilder {
+	
+	/**
+	 * Creates string for the Title field of an embeded Message
+	 * @param emote
+	 * @param titleContent
+	 * @return String
+	 */
+	public static String createTitle(String emote, String titleContent) {	
+		String title = emote + " " + titleContent;
+		return title;
+	}
 	
 	/**
 	 * Create an embeded Message with a Headline and two textfields
@@ -100,7 +112,7 @@ public class MessageBuilder {
 		}
 		
 		String message = "User: **" + author + "**\n\nRequest: **" + request +"**";
-		MessageEmbed msg = MessageBuilder.buildEmbed(Main.createTitle(icon, Main.getTimestamp()), message, null, false);
+		MessageEmbed msg = MessageBuilder.buildEmbed(createTitle(icon, Main.getTimestamp()), message, null, false);
 		return msg;
 	}
 	
@@ -110,9 +122,12 @@ public class MessageBuilder {
 	 * @param emote
 	 * @param channel
 	 */
-	public static void sendAdminLog(String text, String emote, TextChannel channel) {
-		String title = emote + " "+ Main.getTimestamp();
-		channel.sendMessage(buildEmbed(title, text, null, false)).queue();
+	public static void sendAdminLog(String text, String emote) {
+		TextChannel adminlog = GuildHandler.getAdminlog();
+		if (adminlog != null) {
+			String title = emote + " "+ Main.getTimestamp();
+			adminlog.sendMessage(buildEmbed(title, text, null, false)).queue();
+		}
 	}
 
 	/**

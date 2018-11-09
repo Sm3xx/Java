@@ -1,4 +1,4 @@
-package core;
+package commands.core;
 
 import java.util.ArrayList;
 

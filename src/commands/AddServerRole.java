@@ -7,9 +7,8 @@ import commands.core.CommandBase;
 import commands.core.ICommand;
 import containers.ExceptionContainer;
 import core.Logger;
-import core.Main;
 import core.MessageBuilder;
-import core.RoleHandler;
+import core.handlers.RoleHandler;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import util.PERMISSIONS;
@@ -30,7 +29,7 @@ public class AddServerRole extends CommandBase implements ICommand{
 			return true;
 		}
 		
-		if (Main.checkPermission(event.getMember(), PERMISSIONS.ADMIN_COMMAND)) {
+		if (checkPermission(event.getMember(), PERMISSIONS.ADMIN_COMMAND)) {
 			if (args.length == 1) {
 				return false;
 			} else {
@@ -63,8 +62,7 @@ public class AddServerRole extends CommandBase implements ICommand{
 
 	@Override
 	public void executed(boolean success, MessageReceivedEvent event) {
-		String name = Main.getUserName(Main.getGuildMember(event.getAuthor()));
-		Logger.command(this.cmdName + " called by "+name+" [Executed: "+success+"]");
+		Logger.command(this.cmdName + " called by "+getUsername(event.getAuthor())+" [Executed: "+success+"]");
 		
 		if (success) {
 			MessageBuilder.sendInformationMessage(event.getChannel(), Color.WHITE, rolename + " added to all members");
@@ -73,8 +71,7 @@ public class AddServerRole extends CommandBase implements ICommand{
 
 	@Override
 	public void error(boolean success, MessageReceivedEvent event) {
-		String name = Main.getUserName(Main.getGuildMember(event.getAuthor()));
-		Logger.error(this.cmdName+ " called by "+name+" [Executed: "+success+"]");
+		Logger.error(this.cmdName+ " called by "+getUsername(event.getAuthor())+" [Executed: "+success+"]");
 		
 		MessageBuilder.sendInformationMessage(event.getChannel(), Color.RED, "An error occured while executing this command.\n\n**[ErrorMessage]**\n" + ex.getMessage());		
 	}
