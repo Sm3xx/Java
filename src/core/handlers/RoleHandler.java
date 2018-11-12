@@ -19,9 +19,8 @@ public class RoleHandler {
 		return null;		
 	}
 
-	public static ExceptionContainer addRole(Guild guild, Member member, String rolename) {
+	public static ExceptionContainer addRole(Guild guild, Member member, Role role) {
 		try {
-			Role role = getRole(guild, rolename);
 			guild.getController().addSingleRoleToMember(member, role).complete();
 			return null;
 		} catch (Exception e) {
@@ -29,11 +28,11 @@ public class RoleHandler {
 		}
 	}
 	
-	public static ExceptionContainer bulkAddRole(Guild guild, List<Member> members, String rolename) {
+	public static ExceptionContainer bulkAddRole(Guild guild, List<Member> members, Role role) {
 		try {
 			for (Member member : members) {
 				if (!member.getUser().isBot()) {
-					ExceptionContainer error = addRole(guild, member, rolename);
+					ExceptionContainer error = addRole(guild, member, role);
 					if (error != null) {
 						return error;
 					}

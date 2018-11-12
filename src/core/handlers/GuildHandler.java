@@ -5,7 +5,6 @@ import java.util.List;
 import core.Main;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.Role;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
 import util.STATIC;
@@ -61,30 +60,6 @@ public class GuildHandler {
 		} catch (Exception e) {
 			return null;
 		}
-	}
-	
-	/**
-	 * Check if given Member has any Roles on the Discord server (if the user is new on the Server) 
-	 * @param guild
-	 * @param member
-	 * @return true/false
-	 */
-	public static boolean checkNewMember(Member member) {
-		List<Role> serverRoles = getGuild().getRoles();
-		List<Role> userRoles = member.getRoles();
-		boolean oldUser = false;
-		
-		for (Role sr : serverRoles) {
-			for (Role ur : userRoles) {
-				if (ur == sr) {
-					oldUser = true;
-					break;
-				}
-			}
-		}
-		
-		if (oldUser) return false;
-		else return true;
 	}
 	
 }

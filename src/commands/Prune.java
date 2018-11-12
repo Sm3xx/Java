@@ -13,6 +13,7 @@ import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageHistory;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import util.EMOTES;
 import util.PERMISSIONS;
 import util.STATIC;
 
@@ -74,7 +75,7 @@ public class Prune extends CommandBase implements ICommand{
 			
 			TextChannel adminlog = GuildHandler.getChannel(STATIC.ADMIN_LOG);
 			String message = "**" + event.getMember().getEffectiveName() + "** deleted **"+count+"** Messages in **"+event.getChannel().getName()+"**";
-			adminlog.sendMessage(MessageBuilder.buildEmbed(STATIC.INFO + " " + Main.getTimestamp(), message, null, false)).queue();
+			adminlog.sendMessage(MessageBuilder.buildEmbed(EMOTES.INFO + " " + Main.getTimestamp(), message, null, false)).queue();
 		}
 		
 	}

@@ -10,8 +10,8 @@ import core.MessageBuilder;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import util.EMOTES;
 import util.PERMISSIONS;
-import util.STATIC;
 
 public class AutoChannel extends CommandBase implements ICommand{
 	
@@ -77,7 +77,7 @@ public class AutoChannel extends CommandBase implements ICommand{
 				String channels = "";
 				for (Object key : ac.keySet().toArray()) {
 					String channelname = event.getGuild().getVoiceChannelById(key.toString()).getName();
-					channels = channels + STATIC.WHITE_SQUARE + " " + channelname + "\n";
+					channels = channels + EMOTES.WHITE_SQUARE + " " + channelname + "\n";
 				}
 				
 				event.getChannel().sendMessage(error.setTitle("Autochannels:").setDescription(channels).build()).queue();

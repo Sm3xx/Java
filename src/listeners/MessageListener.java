@@ -7,6 +7,7 @@ import core.handlers.GuildHandler;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import util.EMOTES;
 import util.STATIC;
 
 public class MessageListener extends ListenerAdapter{
@@ -23,7 +24,7 @@ public class MessageListener extends ListenerAdapter{
 				String author = event.getAuthor().getName();
 				msg = msg.replace("/ticketgta", "");
 				
-				MessageEmbed message = MessageBuilder.buildTicket(msg.split(" "), author, STATIC.FIVE);
+				MessageEmbed message = MessageBuilder.buildTicket(msg.split(" "), author, EMOTES.FIVE);
 				GuildHandler.getChannel(STATIC.GTA_TICKETS).sendMessage(message).queue();
 			}
 		}

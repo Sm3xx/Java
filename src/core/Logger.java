@@ -2,6 +2,7 @@ package core;
 
 import core.handlers.GuildHandler;
 import net.dv8tion.jda.core.entities.TextChannel;
+import util.EMOTES;
 import util.STATIC;
 
 public class Logger {
@@ -19,7 +20,7 @@ public class Logger {
 		if (STATIC.ERROR_LOG != "") {
 			TextChannel log = GuildHandler.getChannel(STATIC.ERROR_LOG);
 			if (log != null) {
-				String title = STATIC.BANGBANG + " "+ Main.getTimestamp();
+				String title = EMOTES.BANGBANG + " "+ Main.getTimestamp();
 				log.sendMessage(MessageBuilder.buildEmbed(title, message, null, false)).queue();
 			}
 		}

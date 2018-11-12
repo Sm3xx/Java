@@ -7,7 +7,7 @@ import commands.core.ICommand;
 import core.Logger;
 import core.MessageBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import util.STATIC;
+import util.EMOTES;
 
 public class Ping extends CommandBase implements ICommand{
 	
@@ -22,7 +22,7 @@ public class Ping extends CommandBase implements ICommand{
 
 	@Override
 	public boolean action(String[] args, MessageReceivedEvent event) {
-		MessageBuilder.sendInformationMessage(event.getChannel(), Color.green, "Pong! "+STATIC.PING_PONG, 5000);
+		MessageBuilder.sendInformationMessage(event.getChannel(), Color.green, "Pong! "+EMOTES.PING_PONG, 5000);
 		return true;
 	}
 

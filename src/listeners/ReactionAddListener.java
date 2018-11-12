@@ -6,12 +6,14 @@ import containers.ExceptionContainer;
 import core.Logger;
 import core.MessageBuilder;
 import core.handlers.GuildHandler;
+import core.handlers.MemberHandler;
 import core.handlers.RoleHandler;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.events.message.react.MessageReactionAddEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import util.EMOTES;
 import util.MESSAGES;
 import util.ROLES;
 import util.RULES;
@@ -28,42 +30,42 @@ public class ReactionAddListener extends ListenerAdapter{
 		
 		// registration Process
 		if (event.getReaction().getPrivateChannel() != null && !event.getUser().isBot()) {
-			if (GuildHandler.checkNewMember(member)) {
+			if (MemberHandler.checkNewMember(member)) {
 				
 				// choose interest
-				if (emote.equalsIgnoreCase(STATIC.FLAG_DE)) {
-					MessageBuilder.sendReactionMessage(event.getUser(), builder.setDescription(MESSAGES.INTEREST).build(), new String[] {STATIC.VG, STATIC.GTA});
+				if (emote.equalsIgnoreCase(EMOTES.FLAG_DE)) {
+					MessageBuilder.sendReactionMessage(event.getUser(), builder.setDescription(MESSAGES.INTEREST).build(), new String[] {EMOTES.VG, EMOTES.GTA});
 				}
 				
 				// join VG-Community - German
-				if (emote.equalsIgnoreCase(STATIC.VG)) {
-					MessageBuilder.sendReactionMessage(event.getUser(), builder.setDescription(MESSAGES.CHANGE_NAME_DE).build(), new String[] {STATIC.HELP_GRAY}); 
+				if (emote.equalsIgnoreCase(EMOTES.VG)) {
+					MessageBuilder.sendReactionMessage(event.getUser(), builder.setDescription(MESSAGES.CHANGE_NAME_DE).build(), new String[] {EMOTES.HELP_GRAY}); 
 				}
 				
 				// join VG-Community - English
-				if (emote.equalsIgnoreCase(STATIC.FLAG_GB)) {
-					MessageBuilder.sendReactionMessage(event.getUser(), builder.setDescription(MESSAGES.CHANGE_NAME_EN).build(), new String [] {STATIC.HELP_RED});
+				if (emote.equalsIgnoreCase(EMOTES.FLAG_GB)) {
+					MessageBuilder.sendReactionMessage(event.getUser(), builder.setDescription(MESSAGES.CHANGE_NAME_EN).build(), new String [] {EMOTES.HELP_RED});
 				}
 				
 				// help - German
-				if (emote.equalsIgnoreCase(STATIC.HELP_GRAY)) {
+				if (emote.equalsIgnoreCase(EMOTES.HELP_GRAY)) {
 					MessageBuilder.sendReactionMessage(event.getUser(), builder.setDescription(MESSAGES.NAMECHANGE_HELP_DE).build(), null);
 				}
 				
 				// help - English
-				if (emote.equalsIgnoreCase(STATIC.HELP_RED)) {
+				if (emote.equalsIgnoreCase(EMOTES.HELP_RED)) {
 					MessageBuilder.sendReactionMessage(event.getUser(), builder.setDescription(MESSAGES.NAMECHANGE_HELP_EN).build(), null);
 				}
 				
 				// Add GTA-Role
-				if (emote.equalsIgnoreCase(STATIC.GTA)) {
-					ExceptionContainer error = RoleHandler.addRole(guild, member, ROLES.GTA_ROLEPLAY_GUEST);
+				if (emote.equalsIgnoreCase(EMOTES.GTA)) {
+					ExceptionContainer error = RoleHandler.addRole(guild, member, RoleHandler.getRole(guild, ROLES.GTA_ROLEPLAY_GUEST));
 					if (error == null) {
 						MessageBuilder.sendPrivateMessage(event.getUser(), MessageBuilder.buildEmbed(MESSAGES.CONFIRMATION_TITLE_DE, MESSAGES.GTA_ROLE_ADDED, STATIC.EMBED_COLOR, true), "Role-Add");
 					} else {
 						MessageBuilder.sendPrivateMessage(event.getUser(),  new EmbedBuilder().setDescription(MESSAGES.ROLE_ADD_ERROR).setColor(Color.RED).build(), "Error");
 						Logger.error("ReactionAddListener "+error.getMessage());
-						MessageBuilder.sendAdminLog("ReactionAddListener "+error.getMessage(), STATIC.BANGBANG);
+						MessageBuilder.sendAdminLog("ReactionAddListener "+error.getMessage(), EMOTES.BANGBANG);
 					}
 				}
 				
@@ -71,13 +73,13 @@ public class ReactionAddListener extends ListenerAdapter{
 			}
 			
 			// German Rules
-			if (emote.equalsIgnoreCase(STATIC.BOOK_BLUE)) {
+			if (emote.equalsIgnoreCase(EMOTES.BOOK_BLUE)) {
 					MessageBuilder.sendPrivateMessage(event.getUser(), MessageBuilder.buildEmbed(RULES.DE_TITLE, RULES.DE, STATIC.EMBED_COLOR, true), "Rules DE");
 			}
 			
 			// English Rules
-			if (emote.equalsIgnoreCase(STATIC.BOOK_RED)) {
-					MessageBuilder.sendPrivateMessage(event.getUser(), MessageBuilder.buildEmbed(RULES.EN_TITLE, RULES.EN, STATIC.EMBED_COLOR, true), "Rules DE");
+			if (emote.equalsIgnoreCase(EMOTES.BOOK_RED)) {
+					MessageBuilder.sendPrivateMessage(event.getUser(), MessageBuilder.buildEmbed(RULES.EN_TITLE, RULES.EN, STATIC.EMBED_COLOR, true), "Rules EN");
 			}
 		}
 		

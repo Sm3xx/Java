@@ -7,6 +7,7 @@ import core.Logger;
 import core.Main;
 import core.MessageBuilder;
 import core.handlers.GuildHandler;
+import core.handlers.MemberHandler;
 import core.handlers.RoleHandler;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.MessageEmbed;
@@ -14,6 +15,7 @@ import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.guild.member.GuildMemberNickChangeEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import util.EMOTES;
 import util.MESSAGES;
 import util.ROLES;
 import util.STATIC;
@@ -21,8 +23,8 @@ import util.STATIC;
 public class NicknameChangeListener extends ListenerAdapter{
 	
 	private static void sendErr(User user, String message_de, String message_en, String errorType) {
-		String title_de = MessageBuilder.createTitle(STATIC.FLAG_DE, MESSAGES.ERROR_TITLE_DE);
-		String title_en = MessageBuilder.createTitle(STATIC.FLAG_GB, MESSAGES.ERROR_TITLE_EN);
+		String title_de = MessageBuilder.createTitle(EMOTES.FLAG_DE, MESSAGES.ERROR_TITLE_DE);
+		String title_en = MessageBuilder.createTitle(EMOTES.FLAG_GB, MESSAGES.ERROR_TITLE_EN);
 		MessageBuilder.sendPrivateMessage(user, MessageBuilder.buildEmbed(title_de , message_de, title_en, message_en, Color.RED, true), errorType);
 	}
 
@@ -36,22 +38,22 @@ public class NicknameChangeListener extends ListenerAdapter{
 		
 		String msg = "**" + prevNick + "**" + " changed his name to **" + newNick + "**";			
 		
-		channel.sendMessage(MessageBuilder.buildEmbed(STATIC.INFO + " "+Main.getTimestamp(), msg, null, false)).queue();
+		channel.sendMessage(MessageBuilder.buildEmbed(EMOTES.INFO + " "+Main.getTimestamp(), msg, null, false)).queue();
 		
 		// Checking if user is a new User
-		if (GuildHandler.checkNewMember(event.getMember())) {
+		if (MemberHandler.checkNewMember(event.getMember())) {
 			if (!newNick.contains(STATIC.TAG) && !newNick.contains(STATIC.TAG.toUpperCase())) {
 				if (newNick.contains("|")) {
 					String[] name = newNick.split(" ");
 					if (name.length >= 3) {
-						ExceptionContainer error = RoleHandler.addRole(event.getGuild(), event.getMember(), ROLES.GUEST);
+						ExceptionContainer error = RoleHandler.addRole(event.getGuild(), event.getMember(), RoleHandler.getRole(event.getGuild(), ROLES.GUEST));
 						if (error == null) {
 							MessageEmbed message = MessageBuilder.buildEmbed(MESSAGES.GUEST_ROLE_TITLE_DE+" "+newNick, MESSAGES.GUEST_ROLE_ADDED_DE, MESSAGES.GUEST_ROLE_TITLE_EN+" "+newNick, MESSAGES.GUEST_ROLE_ADDED_EN, STATIC.EMBED_COLOR, true);
-							MessageBuilder.sendReactionMessage(event.getUser(), message, new String[] {STATIC.BOOK_BLUE, STATIC.BOOK_RED});
+							MessageBuilder.sendReactionMessage(event.getUser(), message, new String[] {EMOTES.BOOK_BLUE, EMOTES.BOOK_RED});
 						} else {
 							MessageBuilder.sendPrivateMessage(event.getUser(),  new EmbedBuilder().setDescription(MESSAGES.ROLE_ADD_ERROR).setColor(Color.RED).build(), "Error");
 							Logger.error(error.getMessage());
-							MessageBuilder.sendAdminLog("NicknameChangeListener "+error.getMessage(), STATIC.BANGBANG);
+							MessageBuilder.sendAdminLog("NicknameChangeListener "+error.getMessage(), EMOTES.BANGBANG);
 						}
 					} else {
 						// not enough args in the nickname

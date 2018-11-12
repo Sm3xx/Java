@@ -12,9 +12,9 @@ import net.dv8tion.jda.core.entities.Role;
 import net.dv8tion.jda.core.events.guild.member.GuildMemberRoleAddEvent;
 import net.dv8tion.jda.core.events.guild.member.GuildMemberRoleRemoveEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import util.EMOTES;
 import util.MESSAGES;
 import util.ROLES;
-import util.STATIC;
 
 public class RoleChangeListener extends ListenerAdapter{
 	
@@ -26,7 +26,7 @@ public class RoleChangeListener extends ListenerAdapter{
 		checkRolename(roles.get(0).getName(), event);
 		
 		String msg = createMessage(roles.get(0).getName(), getName(m), false);
-		MessageBuilder.sendAdminLog(msg, STATIC.CHECKMARK);
+		MessageBuilder.sendAdminLog(msg, EMOTES.CHECKMARK);
 		Logger.info(roles.get(0).getName()+"-Role added to "+getName(m));
 	}
 	
@@ -36,7 +36,7 @@ public class RoleChangeListener extends ListenerAdapter{
 		String name = MemberHandler.getUserName(event.getMember());
 		
 		String msg = createMessage(roles.get(0).getName() , name, true);
-		MessageBuilder.sendAdminLog(msg, STATIC.CROSS);
+		MessageBuilder.sendAdminLog(msg, EMOTES.CROSS);
 		Logger.info(roles.get(0).getName()+"-Role removed from "+name);
     }
     
@@ -56,8 +56,8 @@ public class RoleChangeListener extends ListenerAdapter{
     
     private void checkRolename(String rolename, GuildMemberRoleAddEvent event) {
     	MessageEmbed message = null;
-    	String title_de = STATIC.PARTY+" "+MESSAGES.JOIN_TITLE_DE+" "+STATIC.PARTY;
-    	String title_en = STATIC.PARTY+" "+MESSAGES.JOIN_TITLE_EN+" "+STATIC.PARTY;
+    	String title_de = EMOTES.PARTY+" "+MESSAGES.JOIN_TITLE_DE+" "+EMOTES.PARTY;
+    	String title_en = EMOTES.PARTY+" "+MESSAGES.JOIN_TITLE_EN+" "+EMOTES.PARTY;
     	
     	if (rolename == ROLES.MEMBER) {
 			message = MessageBuilder.buildEmbed(title_de, MESSAGES.MEMBER_JOIN_DE, title_en, MESSAGES.MEMBER_JOIN_EN, Color.WHITE, true);

@@ -14,10 +14,10 @@ public class MESSAGES {
 	public static String CHOOSE_LANG_TITLE = "Welcome to Veteran-Gaming";
 	public static String CHOOSE_LANG = "Choose your language!";
 	
-	public static String INTEREST = "Möchtest du der Veteran Gaming Community beitreten? Dann klicke auf "+STATIC.VG+"\n\nBist du **NUR** wegen GTA-Roleplay hier, dann klicke auf "+STATIC.GTA;
+	public static String INTEREST = "Möchtest du der Veteran Gaming Community beitreten? Dann klicke auf "+EMOTES.VG+"\n\nBist du **NUR** wegen GTA-Roleplay hier, dann klicke auf "+EMOTES.GTA;
 	
-	public static String CHANGE_NAME_DE = "Bitte passe deinen Nicknamen auf unserem Server auf folgendes Format an: ```Nickname | Vorname```\nFalls du Hilfe benötigst, dann klicke auf "+STATIC.HELP_GRAY+" unter der Nachricht.";
-	public static String CHANGE_NAME_EN = "Edit your Nickname on our Server to make it look like this:```Nickname | First Name```\n If you need any help click "+STATIC.HELP_RED+" at the bottom of the message!";
+	public static String CHANGE_NAME_DE = "Bitte passe deinen Nicknamen auf unserem Server auf folgendes Format an: ```Nickname | Vorname```\nFalls du Hilfe benötigst, dann klicke auf "+EMOTES.HELP_GRAY+" unter der Nachricht.";
+	public static String CHANGE_NAME_EN = "Edit your Nickname on our Server to make it look like this:```Nickname | First Name```\n If you need any help click "+EMOTES.HELP_RED+" at the bottom of the message!";
 	
 	// WAITING ROOM
 	public static String WAITING_ROOM_DE = "Folge der Anleitung, die dir unser Bot gerade als Privatnachricht geschrieben hat, damit er dir die Gastrolle zuweisen kann.";
@@ -43,11 +43,11 @@ public class MESSAGES {
 	// ROLE ADDED
 	public static String GTA_ROLE_ADDED = "Du hast nun die GTA-Roleplay - Gastrolle zugewiesen bekommen und kannst dich in der GTA-Roleplay - Kategorie in den Voice- und Textkanälen frei bewegen.\n\nWende dich bitte im Support-Chat an einen Admin oder Moderator um die jobspezifischen Discord-Rollen zu erhalten. Auch bei weiteren Fragen kannst du dich dort gerne an uns wenden.\n\nDie VG-Community wünscht viel Spaß!";
 	
-	public static String GUEST_ROLE_TITLE_DE = STATIC.FLAG_DE + " Willkommen";
-	public static String GUEST_ROLE_TITLE_EN = STATIC.FLAG_GB + " Welcome"; 
+	public static String GUEST_ROLE_TITLE_DE = EMOTES.FLAG_DE + " Willkommen";
+	public static String GUEST_ROLE_TITLE_EN = EMOTES.FLAG_GB + " Welcome"; 
 	
-	public static String GUEST_ROLE_ADDED_DE = "Du hast nun die Gastrolle zugewiesen bekommen und kannst dich eingeschränkt in den Kanälen bewegen.\nBitte klick noch auf " + STATIC.BOOK_BLUE + " um dir unsere Communityregeln anzuschauen!\n\nViel Spaß bei uns!";
-	public static String GUEST_ROLE_ADDED_EN = "You just obtained the guest role and you are now allowed to use our Text- and Voice-Channels to communicate with us.\nPlease click on " + STATIC.BOOK_RED + " to read our Communityrules!\n\nEnjoy your stay!";
+	public static String GUEST_ROLE_ADDED_DE = "Du hast nun die Gastrolle zugewiesen bekommen und kannst dich eingeschränkt in den Kanälen bewegen.\nBitte klick noch auf " + EMOTES.BOOK_BLUE + " um dir unsere Communityregeln anzuschauen!\n\nViel Spaß bei uns!";
+	public static String GUEST_ROLE_ADDED_EN = "You just obtained the guest role and you are now allowed to use our Text- and Voice-Channels to communicate with us.\nPlease click on " + EMOTES.BOOK_RED + " to read our Communityrules!\n\nEnjoy your stay!";
 	
 	
 	// ROLE ADD ERROR

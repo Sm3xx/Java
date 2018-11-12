@@ -13,6 +13,7 @@ import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import util.EMOTES;
 import util.MESSAGES;
 import util.STATIC;
 
@@ -31,7 +32,7 @@ public class MemberJoinListener extends ListenerAdapter{
 		waiting = GuildHandler.getWaiting();
 		
 		content = new EmbedBuilder().setDescription(MESSAGES.CHOOSE_LANG).setTitle(MESSAGES.CHOOSE_LANG_TITLE).setColor(STATIC.EMBED_COLOR).setFooter(STATIC.FOOTER, null).build();		
-		MessageBuilder.sendReactionMessage(m.getUser(), content, new String[] {STATIC.FLAG_DE, STATIC.FLAG_GB});
+		MessageBuilder.sendReactionMessage(m.getUser(), content, new String[] {EMOTES.FLAG_DE, EMOTES.FLAG_GB});
 		
 		if (waiting != null) {
 			String username = MemberHandler.getUserName(m);
@@ -42,7 +43,7 @@ public class MemberJoinListener extends ListenerAdapter{
 		}
 			
 		String msg = "**" + m.getEffectiveName() + "** joined!";
-		adminlog.sendMessage(MessageBuilder.buildEmbed(STATIC.NEW + " " + Main.getTimestamp(), msg, null, false)).queue();
+		adminlog.sendMessage(MessageBuilder.buildEmbed(EMOTES.NEW + " " + Main.getTimestamp(), msg, null, false)).queue();
 	}
 	
 }
