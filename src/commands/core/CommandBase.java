@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.List;
 
 import core.Logger;
+import core.MessageBuilder;
 import core.handlers.GuildHandler;
 import core.handlers.MemberHandler;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -32,7 +33,7 @@ public abstract class CommandBase {
 	 * @param permissions
 	 * @return true/false
 	 */
-	protected boolean checkPermission(Member member, String[] permissions) {
+	protected boolean checkPermission(MessageReceivedEvent event, Member member, String[] permissions) {
 		List<Role> roleList = member.getRoles();
 		for (String p : permissions) {
 			for (Role r : roleList) {
@@ -41,6 +42,7 @@ public abstract class CommandBase {
 				}
 			}
 		}
+		MessageBuilder.sendInformationMessage(event.getChannel(), Color.red, "Missing permissions!", 5000);	
 		return false;
 	}
 	

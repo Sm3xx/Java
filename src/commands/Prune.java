@@ -35,10 +35,8 @@ public class Prune extends CommandBase implements ICommand{
 			return true;
 		}
 		
-		if (checkPermission(event.getMember(), PERMISSIONS.ADMIN_COMMAND)) {
+		if (checkPermission(event, event.getMember(), PERMISSIONS.ADMIN_COMMAND)) {
 			return false;
-		} else {
-			MessageBuilder.sendInformationMessage(event.getChannel(), Color.red, "Missing permissions!", 5000);			
 		}
 		
 		return true;

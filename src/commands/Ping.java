@@ -17,20 +17,19 @@ public class Ping extends CommandBase implements ICommand{
 
 	@Override
 	public boolean called(String[] args, MessageReceivedEvent event) {
-		return true;
+		return false;
 	}
 
 	@Override
 	public boolean action(String[] args, MessageReceivedEvent event) {
 		MessageBuilder.sendInformationMessage(event.getChannel(), Color.green, "Pong! "+EMOTES.PING_PONG, 5000);
+		Logger.info("Answered with pong");
 		return true;
 	}
 
 	@Override
 	public void executed(boolean success, MessageReceivedEvent event) {
 		Logger.command(this.cmdName + " called by "+getUsername(event.getAuthor())+" [Executed: "+success+"]");
-		
-		Logger.info("Answered with pong");
 	}
 	
 	@Override

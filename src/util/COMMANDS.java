@@ -19,4 +19,7 @@ public class COMMANDS {
 	
 	public static String AC_syntax = "Autochannel Commandlist";
 	public static String AC_helptxt = "▫ /ac add <channelid>\n▫ /ac remove <channelid>\n▫ /ac show\n\nCreate temporary voicechannel";
+	
+	public static String RR_syntax = "";
+	public static String RR_helptxt = "";
 }

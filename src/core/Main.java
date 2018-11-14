@@ -3,14 +3,15 @@ package core;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import commands.AddServerRole;
 import commands.AutoChannel;
 import commands.DevJoin;
 import commands.Ping;
 import commands.Prune;
+import commands.ReloadRoleNames;
 import commands.Rules;
-import commands.Test;
 import commands.Ticket;
 import commands.core.CommandHandler;
 import listeners.ChannelChangeListener;
@@ -36,8 +37,14 @@ public class Main {
 	
 	public static void main(String[] Args) {
 		
+		List<String> file = Reader.readFile("./config/token.txt");
 		
-		builder.setToken(SECRETS.TOKEN);
+		if (file != null) {
+			builder.setToken(file.get(0));
+		} else {
+			builder.setToken(SECRETS.TOKEN);
+		}
+		
 		builder.setAutoReconnect(true);
 		builder.setGame(Game.playing("v"+STATIC.VERSION));
 		
@@ -48,7 +55,6 @@ public class Main {
 		try {
 			jda = builder.build();
 		} catch (Exception e) {}
-		
 	}
 	
 	public static JDA getJDA() {
@@ -69,7 +75,7 @@ public class Main {
 	
 	public static void addCommand() {
 		CommandHandler.registerCommand("join", new DevJoin(null, null, null));
-		CommandHandler.registerCommand("test", new Test());
+		CommandHandler.registerCommand("reloadroles", new ReloadRoleNames("ReloadRoleNames", COMMANDS.RR_syntax, COMMANDS.RR_helptxt));
 		CommandHandler.registerCommand("ping", new Ping("Ping", COMMANDS.PING_syntax, COMMANDS.PING_helptxt));
 		CommandHandler.registerCommand("asr", new AddServerRole("AddServerRole", COMMANDS.ASR_syntax, COMMANDS.ASR_helptxt));
 		CommandHandler.registerCommand("prune", new Prune("Prune", COMMANDS.PRUNE_syntax, COMMANDS.PRUNE_helptxt));

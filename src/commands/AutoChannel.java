@@ -7,7 +7,7 @@ import commands.core.CommandBase;
 import commands.core.ICommand;
 import core.Logger;
 import core.MessageBuilder;
-import net.dv8tion.jda.core.entities.Guild;
+import listeners.VoiceChannelListener;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import util.EMOTES;
@@ -15,14 +15,16 @@ import util.PERMISSIONS;
 
 public class AutoChannel extends CommandBase implements ICommand{
 	
-	private static HashMap<String, Guild> ac = new HashMap<>();
+	private static HashMap<String, String> ac = new HashMap<>();
 	private String operation;
+	private String tag;
+	private String cName;
 
 	public AutoChannel(String cmdName, String syntax, String helptxt) {
 		super(cmdName, syntax, helptxt);
 	}
 	
-	public static HashMap<String, Guild> getAutoChan() {
+	public static HashMap<String, String> getAutoChan() {
 		return ac;
 	}
 
@@ -42,9 +44,14 @@ public class AutoChannel extends CommandBase implements ICommand{
 		
 		channel = event.getTextChannel();
 		
-		if (checkPermission(event.getMember(), PERMISSIONS.ADMIN_COMMAND)) {
+		if (checkPermission(event, event.getMember(), PERMISSIONS.ADMIN_COMMAND)) {
 			if (args.length == 2) {
 				String cid = args[1];
+				
+				if (args[0].toLowerCase().equalsIgnoreCase("tag")) {
+					return false;
+				}
+				
 				try {
 					event.getGuild().getVoiceChannelById(cid);
 					switch (args[0].toLowerCase()) {
@@ -61,7 +68,7 @@ public class AutoChannel extends CommandBase implements ICommand{
 							} else {
 								MessageBuilder.sendInformationMessage(channel, Color.red, "Channel not defined as autochannel");
 								return true;
-							}							
+							}
 					}
 				} catch (NumberFormatException e) {
 					MessageBuilder.sendInformationMessage(channel, Color.red, "Enter a valid channel id");
@@ -95,13 +102,18 @@ public class AutoChannel extends CommandBase implements ICommand{
 	public boolean action(String[] args, MessageReceivedEvent event) {
 		operation = args[0].toLowerCase();
 		String id = args[1];
+		cName = event.getGuild().getVoiceChannelById(id).getName();
 		
 		switch (operation) {
 			case "add":
-				ac.put(id, event.getGuild());
+				ac.put(id, event.getGuild().getId());
 				return true;				
 			case "remove":
 				ac.remove(id);
+				return true;
+			case "tag":
+				tag = id;
+				VoiceChannelListener.setTag(id);
 				return true;
 			default:
 				return false;
@@ -112,10 +124,13 @@ public class AutoChannel extends CommandBase implements ICommand{
 	public void executed(boolean success, MessageReceivedEvent event) {
 		switch(operation) {
 			case "add":
-				MessageBuilder.sendInformationMessage(event.getChannel(), Color.green, "Autochannel added!");
+				MessageBuilder.sendInformationMessage(event.getChannel(), Color.green, "Autochannel **"+cName+"** added!");
 				break;
 			case "remove":
-				MessageBuilder.sendInformationMessage(event.getChannel(), Color.green, "Autochannel removed!");
+				MessageBuilder.sendInformationMessage(event.getChannel(), Color.green, "Autochannel **"+cName+"** removed!");
+				break;
+			case "tag":
+				MessageBuilder.sendInformationMessage(event.getChannel(), Color.green, "Autochannel tag set to **["+tag+"]**");
 				break;
 			default:
 				break;

@@ -14,7 +14,7 @@ public class DevJoin extends CommandBase implements ICommand{
 
 	@Override
 	public boolean called(String[] args, MessageReceivedEvent event) {
-		if (checkPermission(event.getMember(), PERMISSIONS.DEV)) {
+		if (checkPermission(event, event.getMember(), PERMISSIONS.DEV)) {
 			return false;			
 		}
 		return true;
